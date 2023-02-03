@@ -1,12 +1,37 @@
 PennController.ResetPrefix(null); 
 var showProgressBar = false;
 
+function SepWithN(sep, main, n) {
+    this.args = [sep,main];
+
+    this.run = function(arrays) {
+        assert(arrays.length == 2, "Wrong number of arguments (or bad argument) to SepWithN");
+        assert(parseInt(n) > 0, "N must be a positive number");
+        let sep = arrays[0];
+        let main = arrays[1];
+
+        if (main.length < = 1)
+            return main
+        else {
+            let newArray = [];
+            while (main.length){
+                for (let i = 0; i < n && main.length>0; i++)
+                    newArray.push(main.shift());
+                for (let j = 0; j < sep.length; ++j)
+                    newArray.push(sep[j]);
+            }
+            return newArray;
+        }
+    }
+}
+function sepWithN(sep, main, n) { return new SepWithN(sep, main, n); }
+
 Sequence("Intro",
     "Statement",
     "Intro2",
     "trainingP",
     "TrainE",
-    randomize("ExperimentP"),
+    Sequence(sepWithN( "Break" , shuffleInChunks("ExperimentP",36,"catch",1) , 78))
     "Outro",
     SendResults(),
     "Outro2",
@@ -256,102 +281,17 @@ newTooltip("guide", "Carefully read the expression and decide what the final wor
         .log( "target" , row.Fragment )
         .log( "Answer", row.Correct);
 
-Template( "Nonsense.txt", row =>
-        newTrial("ExperimentN",
-    defaultText.center().print("center at 50vw","middle at 50vh")
-    ,
-    // Automatically start and wait for Timer elements when created
-    defaultTimer.start().wait()
-    ,
-    // Mask, shown on screen for 500ms
-    newText("mask","+++"),
-    newTimer("maskTimer", 1000),                       
-    getText("mask").remove()
-    ,
-            newText("<p>")
-                .css("font-size","1.4em")
-                .print()
-,
-            newText("target", `<p><i>${row.Nonsense}.</i></p>`)
-                .center()
-                .print()
-,
-newTooltip("guide", "Carefully read the expression and decide what the final word is likely to be. Use your keyboard to type your answer in the field below.")
-        .position("top center")  // Display it below the element it attaches to
-        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
-        .print(getText("target"))   // Attach to the "target" Text element
-            ,
-            newTextInput("InputAnsw", "Type your answer here..")
-                .log()
-                .lines(0)
-                .size(200, 100)
-                .center()
-                .print()
-        ,
-            newText("<p>")
-                .css("font-size","1.4em")
-                .print()
-            ,
-            newButton("submit", "Submit")
-                .center()
-                .print()
-                .wait()
-        ,
-                    getText("target").remove()          // End of trial, remove "target"
-
-))
-
-        .log( "target" , row.Nonsense )
-        .log( "Answer", row.Correct);
-
-Template( "Literal.txt", row =>
-        newTrial("ExperimentL",
-    defaultText.center().print("center at 50vw","middle at 50vh")
-    ,
-    // Automatically start and wait for Timer elements when created
-    defaultTimer.start().wait()
-    ,
-    // Mask, shown on screen for 500ms
-    newText("mask","+++"),
-    newTimer("maskTimer", 1000),                       
-    getText("mask").remove()
-    ,
-            newText("<p>")
-                .css("font-size","1.4em")
-                .print()
-,
-            newText("target", `<p><i>${row.Literal}.</i></p>`)
-                .center()
-                .print()
-,
-newTooltip("guide", "Carefully read the expression and decide what the final word is likely to be. Use your keyboard to type your answer in the field below.")
-        .position("top center")  // Display it below the element it attaches to
-        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
-        .print(getText("target"))   // Attach to the "target" Text element
-            ,
-            newTextInput("InputAnsw", "Type your answer here..")
-                .log()
-                .lines(0)
-                .size(200, 100)
-                .center()
-                .print()
-        ,
-            newText("<p>")
-                .css("font-size","1.4em")
-                .print()
-            ,
-            newButton("submit", "Submit")
-                .center()
-                .print()
-                .wait()
-        ,
-                    getText("target").remove()          // End of trial, remove "target"
-
-))
-
-        .log( "target" , row.Literal )
-        .log( "Answer", row.Correct)
-        .log( "Answ");
+newTrial( "Break",
+    defaultText.center().print()
+     ,
+     newText("<p> This is a break. When you are ready to continue, press the button below.</p>")
+        .bold()
+     ,
+     newButton("break button", "I am ready to continue.")
+        .center()
+        .print()
+        .wait()
+)
 
 newTrial( "Outro",
     defaultText.center().print()
