@@ -1,21 +1,21 @@
 PennController.ResetPrefix(null); 
 var showProgressBar = false;
 
-function SepWithN(sep, main, n) {
-    this.args = [sep,main];
+function SepWithN(sep, ExperimentP, n) {
+    this.args = [sep,ExperimentP];
 
     this.run = function(arrays) {
         assert(arrays.length == 2, "Wrong number of arguments (or bad argument) to SepWithN");
         assert(parseInt(n) > 0, "N must be a positive number");
         let sep = arrays[0];
-        let main = arrays[1];
+        let ExperimentP = arrays[1];
 
         if (main.length < = 1)
-            return main
+            return ExperimentP
         else {
             let newArray = [];
-            while (main.length){
-                for (let i = 0; i < n && main.length>0; i++)
+            while (ExperimentP.length){
+                for (let i = 0; i < n && ExperimentP.length>0; i++)
                     newArray.push(main.shift());
                 for (let j = 0; j < sep.length; ++j)
                     newArray.push(sep[j]);
@@ -24,7 +24,7 @@ function SepWithN(sep, main, n) {
         }
     }
 }
-function sepWithN(sep, main, n) { return new SepWithN(sep, main, n); }
+function sepWithN(sep, ExperimentP, n) { return new SepWithN(sep, ExperimentP, n); }
 
 Sequence("Intro",
     "Statement",
