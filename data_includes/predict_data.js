@@ -31,7 +31,7 @@ Sequence("Intro",
     "Intro2",
     "trainingP",
     "TrainE",
-    Sequence(sepWithN( "Break" , shuffleInChunks("ExperimentP",36,"catch",1) , 78))
+    Sequence(sepWithN( "Break" , shuffleInChunks("ExperimentP",36,"catch",1) , 78)),
     "Outro",
     SendResults(),
     "Outro2",
