@@ -1,5 +1,4 @@
 PennController.ResetPrefix(null); 
-PennController.AddHost("https://github.com/ngriffen/Idiom_Norm");
 var showProgressBar = false;
 
 Sequence("Intro",
@@ -209,7 +208,7 @@ Header(
 )
 .log( "answ" , getVar("Answ") ) 
 
-Template( "Predict.txt", row =>
+Template( "Idioms.txt", row =>
         newTrial("ExperimentP",
     defaultText.center().print("center at 50vw","middle at 50vh")
     ,
