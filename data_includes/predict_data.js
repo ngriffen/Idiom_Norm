@@ -1,22 +1,6 @@
 PennController.ResetPrefix(null); 
 var showProgressBar = false;
 
-function Pick(set,n) {
-    assert(set instanceof Object, "First argument of pick cannot be a plain string" );
-    n = Number(n);
-    if (isNaN(n) || n<0) n = 0;
-    this.args = [set];
-    set.remainingSet = null;
-    this.run = function(arrays){
-        if (set.remainingSet===null) set.remainingSet = arrays[0];
-        const newArray = [];
-        for (let i = 0; i < n && set.remainingSet.length; i++)
-            newArray.push( set.remainingSet.shift() );
-        return newArray;
-    }
-}
-function pick(set, n) { return new Pick(set,n); } 
-
 Sequence("Intro",
     "Statement",
     "Intro2",
@@ -30,6 +14,8 @@ Sequence("Intro",
     "Outro2",
     "end"
 )
+
+AddHost("https://github.com/ngriffen/Idiom_Norm")
 
 Header(
     newVar("ID").global()    
@@ -144,7 +130,7 @@ Template( "PredictP.txt", row =>
                 .center()
                 .print()
     ,
-            newTooltip("guide", "In this task, you will be shown an incomplete expression such as the one below. You will be asked to carefully read the expression and decide what the final word is likely to be. When you have made your decision you can your keyboard to type your answer in the field below.")
+            newTooltip("guide", "In this task, you will be shown an incomplete expression such as the one below. You will be asked to carefully read the expression and decide what the final word is likely to be. When you have made your decision you can use your keyboard to type your answer in the field below.")
         .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
