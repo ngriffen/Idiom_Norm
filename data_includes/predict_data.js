@@ -1,29 +1,12 @@
 PennController.ResetPrefix(null); 
 var showProgressBar = false;
 
-function Pick(set,n) {
-    assert(set instanceof Object, "First argument of pick cannot be a plain string" );
-    n = Number(n);
-    if (isNaN(n) || n<0) n = 0;
-    this.args = [set];
-    set.remainingSet = null;
-    this.run = function(arrays){
-        if (set.remainingSet===null) set.remainingSet = arrays[0];
-        const newArray = [];
-        for (let i = 0; i < n && set.remainingSet.length; i++)
-            newArray.push( set.remainingSet.shift() );
-        return newArray;
-    }
-}
-function pick(set, n) { return new Pick(set,n); } 
-
 Sequence("Intro",
     "Statement",
     "Intro2",
     "trainingP",
     "TrainE",
-    pick(liste=randomize("ExperimentP"),39),
-    "break",
+    pick(liste=randomize("ExperimentP"),39),"Pause",
     pick(liste,39),
     "Outro",
     SendResults(),
@@ -275,17 +258,38 @@ newTooltip("guide", "Carefully read the expression and decide what the final wor
         .log( "target" , row.Fragment )
         .log( "Answer", row.Correct);
 
-newTrial( "break",
-    defaultText.center().print()
-     ,
-     newText("<p> This is a break. When you are ready to continue, press the button below.</p>")
-        .bold()
-     ,
-     newButton("break button", "I am ready to continue.")
+Template( "Pause.txt", row =>
+        newTrial("Pause",
+    defaultText.center().print("center at 50vw","middle at 50vh")
+    ,
+    // Automatically start and wait for Timer elements when created
+    defaultTimer.start().wait()
+    ,
+    // Mask, shown on screen for 500ms
+    newText("mask","+++"),
+    newTimer("maskTimer", 1000),                       
+    getText("mask").remove()
+    ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+,
+            newText("target", `<p><i>${row.Pause}.</i></p>`)
+                .bold()
+                .color("blue")
+                .center()
+                .print()
+,
+newTooltip("guide", "This is a break, when you are ready to continue press the button below.")
+        .position("top center")  // Display it below the element it attaches to
+        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
+        .print(getText("target"))   // Attach to the "target" Text element
+                ,
+    newButton("EndPause","I am ready to continue.")
         .center()
         .print()
         .wait()
-)
+))
 
 newTrial( "Outro",
     defaultText.center().print()
@@ -354,3 +358,6 @@ newTrial( "Outro",
            .print()
            .wait()
 );
+
+    
+
