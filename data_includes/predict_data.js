@@ -1,17 +1,36 @@
 PennController.ResetPrefix(null); 
 var showProgressBar = false;
 
+function Pick(set,n) {
+    assert(set instanceof Object, "First argument of pick cannot be a plain string" );
+    n = Number(n);
+    if (isNaN(n) || n<0) n = 0;
+    this.args = [set];
+    set.remainingSet = null;
+    this.run = function(arrays){
+        if (set.remainingSet===null) set.remainingSet = arrays[0];
+        const newArray = [];
+        for (let i = 0; i < n && set.remainingSet.length; i++)
+            newArray.push( set.remainingSet.shift() );
+        return newArray;
+    }
+}
+function pick(set, n) { return new Pick(set,n); } 
+
 Sequence("Intro",
     "Statement",
     "Intro2",
     "trainingP",
     "TrainE",
-    sepWithN( "Break" , rshuffle("ExperimentP") , 36),
+    pick(liste=randomize("ExperimentP"),39),
+    "break",
+    pick(liste,39),
     "Outro",
     SendResults(),
     "Outro2",
     "end"
 )
+
 
 
 Header(
@@ -256,7 +275,7 @@ newTooltip("guide", "Carefully read the expression and decide what the final wor
         .log( "target" , row.Fragment )
         .log( "Answer", row.Correct);
 
-newTrial( "Break",
+newTrial( "break",
     defaultText.center().print()
      ,
      newText("<p> This is a break. When you are ready to continue, press the button below.</p>")
