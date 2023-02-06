@@ -15,7 +15,96 @@ Sequence("Intro",
     "end"
 )
 
-AddHost("https://github.com/ngriffen/Idiom_Norm")
+newTrial( "break" ,
+                newText("<p>This is a break.</p>")
+                .css("font-size","1.4em")
+                .center()
+                .color("blue")
+                .print()    
+                ,
+                newText("<p>Press the button below when you are ready to continue.</p>")
+                .center()
+                .color("blue")
+                .print()  
+                ,
+                 newText("<p>")
+                .css("font-size","1.4em")
+                .print()             
+                ,
+                newButton("breakbutton", "I am ready to continue.")
+                .center()
+                .print()
+                .wait()
+                
+)
+
+newTrial( "Outro",
+    defaultText.center().print()
+     ,
+     newText("<p>Thank you for your participation!</p>")
+        .color("blue")     
+        .bold()
+     ,
+     newText("<p>To complete this experiment, please enter the requested information below.</p>")
+           .center()
+           .print()
+    ,
+    newText("<b>Gender</b>")
+    ,
+    newDropDown("gender" , "select")
+    .add( "Female" , "Male" , "Other" )
+    .center()
+    .css("margin","1em")
+    .print()
+    .log()
+    .wait()
+    ,
+    newText("<p> </p>")
+    ,
+    newText("<b>Level of education</b>")
+    ,
+    newDropDown("education" , "select")
+    .add( "High School" , "Some University" , "University Graduate" )
+    .center()
+    .css("margin","1em")
+    .print()
+    .log()
+    .wait()
+    ,
+   newText("<b>Age</b>")
+    ,
+    newDropDown("age" , "select")
+    .add( "19","20" , "21","22" ,"23","24","25","26","27","28","29","30","31","32","33","34")
+    .center()
+    .css("margin","1em")
+    .print()
+    .log()
+    .wait()
+    ,
+    newText("warning", "Please fill in the information below.")
+        .color("red")
+        .bold()
+        .remove()
+    ,
+    newButton("Enter button", "Enter")
+        .center()
+        .print()
+        .wait()
+)
+    
+    newTrial( "Outro2",
+    defaultText.center().print()
+     ,
+    newText("<p>You need to certify your completion of this experiment, click the link below!</p>")
+        .color("blue")     
+        .bold()
+     ,
+     newText("<p><a href='https://app.prolific.co/submissions/complete?cc=50DDF214' target=_'blank' >"+
+          "Confirm my participation on Prolific.</a></p>")
+           .center()
+           .print()
+           .wait()
+)
 
 Header(
     newVar("ID").global()    
@@ -130,7 +219,7 @@ Template( "PredictP.txt", row =>
                 .center()
                 .print()
     ,
-            newTooltip("guide", "In this task, you will be shown an incomplete expression such as the one below. You will be asked to carefully read the expression and decide what the final word is likely to be. When you have made your decision you can use your keyboard to type your answer in the field below.")
+            newTooltip("guide", "In this task, you will be shown an incomplete expression such as the one below. You will be asked to carefully read the expression and decide what the final word is likely to be. When you have made your decision you can your keyboard to type your answer in the field below.")
         .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
@@ -259,94 +348,6 @@ newTooltip("guide", "Carefully read the expression and decide what the final wor
         .log( "target" , row.Fragment )
         .log( "Answer", row.Correct);
 
-newTrial( "break" ,
-                newText("<p>This is a break.</p>")
-                .css("font-size","1.4em")
-                .center()
-                .color("blue")
-                .print()    
-                ,
-                newText("<p>Press the button below when you are ready to continue.</p>")
-                .center()
-                .color("blue")
-                .print()  
-                ,
-                 newText("<p>")
-                .css("font-size","1.4em")
-                .print()             
-                ,
-                newButton("breakbutton", "I am ready to continue.")
-                .center()
-                .print()
-                .wait()
-                
-)
 
-newTrial( "Outro",
-    defaultText.center().print()
-     ,
-     newText("<p>Thank you for your participation!</p>")
-        .color("blue")     
-        .bold()
-     ,
-     newText("<p>To complete this experiment, please enter the requested information below.</p>")
-           .center()
-           .print()
-    ,
-    newText("<b>Gender</b>")
-    ,
-    newDropDown("gender" , "select")
-    .add( "Female" , "Male" , "Other" )
-    .center()
-    .css("margin","1em")
-    .print()
-    .log()
-    .wait()
-    ,
-    newText("<p> </p>")
-    ,
-    newText("<b>Level of education</b>")
-    ,
-    newDropDown("education" , "select")
-    .add( "High School" , "Some University" , "University Graduate" )
-    .center()
-    .css("margin","1em")
-    .print()
-    .log()
-    .wait()
-    ,
-   newText("<b>Age</b>")
-    ,
-    newDropDown("age" , "select")
-    .add( "19","20" , "21","22" ,"23","24","25","26","27","28","29","30","31","32","33","34")
-    .center()
-    .css("margin","1em")
-    .print()
-    .log()
-    .wait()
-    ,
-    newText("warning", "Please fill in the information below.")
-        .color("red")
-        .bold()
-        .remove()
-    ,
-    newButton("Enter button", "Enter")
-        .center()
-        .print()
-        .wait()
-)
-    
-    newTrial( "Outro2",
-    defaultText.center().print()
-     ,
-    newText("<p>You need to certify your completion of this experiment, click the link below!</p>")
-        .color("blue")     
-        .bold()
-     ,
-     newText("<p><a href='https://app.prolific.co/submissions/complete?cc=50DDF214' target=_'blank' >"+
-          "Confirm my participation on Prolific.</a></p>")
-           .center()
-           .print()
-           .wait()
-);
+
 
