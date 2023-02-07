@@ -4,10 +4,8 @@ var showProgressBar = false;
 Sequence("Intro",
     "Statement",
     "Intro2",
-    "preloadPractice",
     "trainingP",
     "TrainE",
-    "preloadTest",
     pick(liste=randomize("ExperimentP"),39),
     "break",
     pick(liste,39),
@@ -218,11 +216,11 @@ Template( "PredictP.txt", row =>
     newTimer("maskTimer", 1000),                       
     getText("mask").remove()
             ,
-            newText("target", `<p><i>${row.Fragment}.</i></p>`)
+    newText("target", `<p><i>${row.Fragment}.</i></p>`)
                 .center()
                 .print()
     ,
-            newTooltip("guide", "In this task, you will be shown an incomplete expression such as the one below. You will be asked to carefully read the expression and decide what the final word is likely to be. When you have made your decision you can your keyboard to type your answer in the field below.")
+    newTooltip("guide", "In this task, you will be shown an incomplete expression such as the one below. You will be asked to carefully read the expression and decide what the final word is likely to be. When you have made your decision you can your keyboard to type your answer in the field below.")
         .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
