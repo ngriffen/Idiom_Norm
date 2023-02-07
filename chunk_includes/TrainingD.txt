@@ -1,0 +1,6 @@
+Fragment	Correct	Incorrect
+She changed her  mind	1	Try selecting '1' on the scale
+She drove him there	2	Try selecting '2' on the scale
+They spread the  word	3	Try selecting '3' on the scale
+He cracked a joke	4	Try selecting '4' on the scale
+He threw a party	5	Try selecting '5' on the scale
