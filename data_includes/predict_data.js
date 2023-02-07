@@ -1,11 +1,13 @@
-PennController.ResetPrefix(null); 
+PennController.ResetPrefix(null);
 var showProgressBar = false;
 
 Sequence("Intro",
     "Statement",
     "Intro2",
+    "preloadPractice",
     "trainingP",
     "TrainE",
+    "preloadTest",
     pick(liste=randomize("ExperimentP"),39),
     "break",
     pick(liste,39),
@@ -14,6 +16,7 @@ Sequence("Intro",
     "Outro2",
     "end"
 )
+  
 
 newTrial( "break" ,
                 newText("<p>This is a break.</p>")
@@ -25,7 +28,7 @@ newTrial( "break" ,
                 newText("<p>Press the button below when you are ready to continue.</p>")
                 .center()
                 .color("blue")
-                .print()  
+                .print()  
                 ,
                  newText("<p>")
                 .css("font-size","1.4em")
@@ -151,7 +154,7 @@ newTrial("Intro",
         .center()
         .print()
         // Only validate a click on Start when inputID has been filled
-        .wait(  // Make sure the TextInput has been filled
+        .wait(  // Make sure the TextInput has been filled
             getTextInput("inputID")
                 .testNot.text("")
                 .failure( getText("warning").print() )
@@ -169,7 +172,7 @@ newTrial("Intro",
      ,
      newText("<a href='https://e1.pcloud.link/publink/show?code=XZ3q8bZfAWom9MGCAYL3MYlk4hwgSAhGtkX' target=_'blank' >"+
           "Click here if you would like to review the information sheet.</a>")
-         .css("margin","1em")  
+         .css("margin","1em")
          .print()
      ,
      newButton("consent button2", "I consent")
@@ -220,7 +223,7 @@ Template( "PredictP.txt", row =>
                 .print()
     ,
             newTooltip("guide", "In this task, you will be shown an incomplete expression such as the one below. You will be asked to carefully read the expression and decide what the final word is likely to be. When you have made your decision you can your keyboard to type your answer in the field below.")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
     ,
@@ -298,7 +301,7 @@ newTrial("TrainE",
 Header(
     newVar("Answ").global()    
 )
-.log( "answ" , getVar("Answ") ) 
+.log( "answ" , getVar("Answ") )
 
 Template( "Idioms.txt", row =>
         newTrial("ExperimentP",
@@ -321,7 +324,7 @@ Template( "Idioms.txt", row =>
                 .print()
 ,
 newTooltip("guide", "Carefully read the expression and decide what the final word is likely to be. Use your keyboard to type your answer in the field below.")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
@@ -344,9 +347,6 @@ newTooltip("guide", "Carefully read the expression and decide what the final wor
                     getText("target").remove()          // End of trial, remove "target"
 
 ))
-
-        .log( "target" , row.Fragment )
-        .log( "Answer", row.Correct);
 
 
 
