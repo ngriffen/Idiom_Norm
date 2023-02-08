@@ -39,6 +39,36 @@ newTrial( "break" ,
                 
 )
 
+newTrial( "Example" ,
+defaultText.center().print(),
+newText(`<p><b> In this experiment, you will be asked to judge the <b>Familiarity</b> of each expression that you are shown.</b></p>`)
+                .center()
+                .print()
+,
+            newText(`<p>Notably this is not a judgement of how well you know the expression, it is strictly a judgement on how often you have seen, heard or used it.</p>`)
+                .color("red")
+                .center()
+                .print()
+,
+            newText(`<p>An example would be if you were given the expression <i>she got cold feet</i> and you had seen, heard or used it quite frequently. As a result, you could give a rating of <b>5</b> to indicate your familiarity with this expression.</p>`)
+                .center()
+                .print()
+,
+            newText(`<p>Another example would be if you were given the expression <i>he counted sheep</i> and you had never encountered this expression. As a result, you could give a rating of <b>1</b> to indicate your familiarity with it.</p>`)
+                .center()
+                .print()
+,
+            newText(`<p>When you are ready, to begin the training session click the button below.</p>`)
+                .center()
+                .print()
+,
+            newButton("ready button", "I am ready to begin the training session.")
+                .center()
+                .print()
+                .wait()
+                
+)
+
 newTrial( "Outro",
     defaultText.center().print()
      ,
@@ -237,7 +267,7 @@ Template( "TrainingD.txt", row =>
     defaultTimer.start().wait()
     ,
     // Mask, shown on screen for 500ms
-    newText("mask","+Practice Session+"),
+    newText("mask","+Training Session+"),
     newTimer("maskTimer", 1000),                       
     getText("mask").remove()
             ,
