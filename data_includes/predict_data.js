@@ -237,7 +237,7 @@ Template( "TrainingD.txt", row =>
     defaultTimer.start().wait()
     ,
     // Mask, shown on screen for 500ms
-    newText("mask","+Practice Session+"),
+    newText("mask","+Training Session+"),
     newTimer("maskTimer", 1000),                       
     getText("mask").remove()
             ,
