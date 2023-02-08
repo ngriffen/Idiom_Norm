@@ -46,7 +46,7 @@ newText(`<p><b> In this experiment, you will be asked to judge the <b>Familiarit
                 .center()
                 .print()
 ,
-            newText(`<p>Notably this is not a judgement of how well you know the expression, it is strictly a judgement on how often you have seen, heard or used it.</p>`)
+            newText(`<p>Notably this is not a judgement of how well you know each expression, it is strictly a judgement on how often you have seen, heard or used it.</p>`)
                 .color("red")
                 .center()
                 .print()
