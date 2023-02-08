@@ -5,6 +5,7 @@ Sequence("Intro",
     "Statement",
     "Intro2",
     "Intro3",
+    "Example",
     "trainingM",
     "TrainE",
     pick(liste=randomize("ExperimentM"),39),
@@ -33,6 +34,31 @@ newTrial( "break" ,
                 .print()             
                 ,
                 newButton("breakbutton", "I am ready to continue.")
+                .center()
+                .print()
+                .wait()
+                
+)
+
+newTrial( "Example" ,
+defaultText.center().print(),
+newText(`<p><b> In this experiment, you will be asked to judge the <b>Meaningfulness</b> of each expression that you are shown.</b></p>`)
+                .center()
+                .print()
+,
+            newText(`<p>An example would be if you were given the expression <i>she got cold feet</i> and you knew its meaning to be <i>to not get married</i> with absolute certainty. As a result, you could give a rating of <b>5</b> to indicate your knowledge of its meaning.</p>`)
+                .center()
+                .print()
+,
+            newText(`<p>Another example would be if you were given the expression <i>he counted sheep</i> and you had no idea what this expression meant. As a result, you could give a rating of <b>1</b> to indicate your lack of knowledge of its meaning.</p>`)
+                .center()
+                .print()
+,
+            newText(`<p>When you are ready, to begin the training session click the button below.</p>`)
+                .center()
+                .print()
+,
+            newButton("ready button", "I am ready to begin the training session.")
                 .center()
                 .print()
                 .wait()
@@ -218,15 +244,18 @@ newTrial("Intro3",
             .center()
             .print()
 ,
-            newText(`<p>When you are ready, to begin the training session click the button below.</p>`)
-                .center()
-                .print()
+    newText("When you are ready to see an example, please click the button below.")
 ,
-            newButton("ready button", "I am ready to begin the training session.")
-                .center()
-                .print()
-                .wait()
+    newText("<p>")
+    .css("font-size","1.4em")
+    .print()
+,
+    newButton("cont button", "Continue")
+    .center()
+        .print()
+        .wait()
 )
+
 
 
 Template( "TrainingD.txt", row =>
@@ -237,7 +266,7 @@ Template( "TrainingD.txt", row =>
     defaultTimer.start().wait()
     ,
     // Mask, shown on screen for 500ms
-    newText("mask","+Practice Session+"),
+    newText("mask","+Training Session+"),
     newTimer("maskTimer", 1000),                       
     getText("mask").remove()
             ,
