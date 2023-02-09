@@ -291,8 +291,7 @@ Template( "TrainingDD.txt", row =>
                 .remove()
                 ,
             newScale("Blank",  "Yes",  "No")
-                .radio()
-                .labelsPosition("bottom")
+                .labelsPosition("right")
                 .center()
                 .print()
                 .wait()
@@ -351,7 +350,7 @@ newTrial("TrainE",
 
 
 Template( "Idioms.txt", row =>
-        newTrial("ExperimentL",
+        newTrial("ExperimentD",
             defaultText.center().print("center at 50vw","middle at 50vh")
     ,
     // Automatically start and wait for Timer elements when created
@@ -366,14 +365,13 @@ Template( "Idioms.txt", row =>
                 .center()
                 .print()
     ,
-    newTooltip("guide", "Carefully read the expression and rate how familiar you are with the expression below. Use the full range of the scale to make your decision.")
+    newTooltip("guide", "Carefully read the expression and decide whether the individual words of the expression relate to its overall meaning. Select <b>Yes</b> or <b>No</b> to to make your decision.")
         .position("top center")// Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
     ,
             newScale("Blank",  "Yes",  "No")
-                .radio()
-                .labelsPosition("bottom")
+                .labelsPosition("right")
                 .center()
                 .print()
                 .wait()
