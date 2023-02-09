@@ -33,7 +33,7 @@ newTrial( "break" ,
                 .css("font-size","1.4em")
                 .print()             
                 ,
-                newButton("breakbutton", "I am ready to continue.")
+                newButton("breakbutton", "I am ready to continue")
                 .center()
                 .print()
                 .wait()
@@ -63,7 +63,7 @@ newText(`<p><b> In this experiment, you will be asked to judge the <b>Familiarit
                 .center()
                 .print()
 ,
-            newButton("ready button", "I am ready to begin the training session.")
+            newButton("ready button", "I am ready to begin the training session")
                 .center()
                 .print()
                 .wait()
@@ -179,7 +179,7 @@ newTrial("Intro",
         .bold()
         .remove()
     ,
-    newButton("prolificID button", "I have entered my Prolific ID.")
+    newButton("prolificID button", "I have entered my Prolific ID")
         .center()
         .print()
         // Only validate a click on Start when inputID has been filled
@@ -249,14 +249,16 @@ newTrial("Intro3",
             .center()
             .print()
 ,
-            newText(`<p>When you are ready, to begin the training session click the button below.</p>`)
-                .center()
-                .print()
+            newText("When you are ready to see an example, please click the button below.")
 ,
-            newButton("ready button", "I am ready to begin the training session.")
-                .center()
-                .print()
-                .wait()
+            newText("<p>")
+            .css("font-size","1.4em")
+            .print()
+,
+            newButton("cont button", "Continue")
+            .center()
+            .print()
+            .wait()
 )
 
 
@@ -347,7 +349,7 @@ newTrial("TrainE",
     .css("font-size","1.4em")
     .print()
     ,
-    newButton("ready experiment", "I am ready to begin the experiment.")
+    newButton("ready experiment", "I am ready to begin the experiment")
     .center()
         .print()
         .wait()
@@ -370,7 +372,7 @@ Template( "Idioms.txt", row =>
                 .center()
                 .print()
     ,
-    newTooltip("guide", "Carefully read the expression and rate how familiar you are with the expression below. Use the full range of the scale to make your decision.")
+    newTooltip("guide", "Carefully read the expression and rate how familiar you are with it. Use the full range of the scale to make your decision.")
         .position("top center")// Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
