@@ -4,10 +4,9 @@ var showProgressBar = false;
 Sequence("Intro",
     "Statement",
     "Intro2",
-    "Intro3",
-    "trainingM",
+    "trainingP",
     "TrainE",
-    pick(liste=randomize("ExperimentM"),39),
+    pick(liste=randomize("ExperimentP"),39),
     "break",
     pick(liste,39),
     "Outro",
@@ -15,6 +14,7 @@ Sequence("Intro",
     "Outro2",
     "end"
 )
+  
 
 newTrial( "break" ,
                 newText("<p>This is a break.</p>")
@@ -26,13 +26,13 @@ newTrial( "break" ,
                 newText("<p>Press the button below when you are ready to continue.</p>")
                 .center()
                 .color("blue")
-                .print()
+                .print()  
                 ,
                  newText("<p>")
                 .css("font-size","1.4em")
                 .print()             
                 ,
-                newButton("breakbutton", "I am ready to continue.")
+                newButton("breakbutton", "I am ready to continue")
                 .center()
                 .print()
                 .wait()
@@ -118,19 +118,19 @@ newTrial("Intro",
     newText("<p>Hello! Welcome to the experiment!</p>")
         .bold()
     ,
-    newText("In this task, you will be shown a series of expressions.")
+    newText("In this task, you will be shown a series of incomplete expressions.")
     ,
     newText("<p>")
     .css("font-size","1.4em")
     .print()
     ,
-    newText("Each expression that you will see shall have the same form.")
+    newText("Each expression that you will be shown will be missing its final word.")
     ,
     newText("<p>")
     .css("font-size","1.4em")
     .print()
     ,
-    newText("Your task is to carefully read each expression and to decide how well you know its meaning.")
+    newText("Your task is to carefully read each expression and to decide how they should be completed.")
     ,
     newText("<p>Are you ready?</p>")
     ,
@@ -148,11 +148,11 @@ newTrial("Intro",
         .bold()
         .remove()
     ,
-    newButton("prolificID button", "I have entered my Prolific ID.")
+    newButton("prolificID button", "I have entered my Prolific ID")
         .center()
         .print()
         // Only validate a click on Start when inputID has been filled
-        .wait(// Make sure the TextInput has been filled
+        .wait(  // Make sure the TextInput has been filled
             getTextInput("inputID")
                 .testNot.text("")
                 .failure( getText("warning").print() )
@@ -197,56 +197,31 @@ newTrial("Intro2",
     .css("font-size","1.4em")
     .print()
     ,
-    newButton("cont button", "Continue")
+    newButton("ready button", "I am ready to begin the training session")
     .center()
         .print()
         .wait()
 )
 
-newTrial("Intro3",
-    defaultText.center().print()
-,
-            newText(`<p><b> In this experiment, you will be asked to judge the <b>Meaningfulness</b> of each expression that you are shown.</b></p>`)
-                .center()
-                .print()
-,
-            newText(`<p>Your task is to rate how well you know the meaning of each expression you are given by using the full range of the <b>1-5</b> scale to make your decision.</p>`)
-                .center()
-                .print()
-,
-            newText('<p><i>Normally, a rating of <b>1</b> would indicate that you have absolutely no idea what the expression means. A rating of <b>3</b> would indicate that you are moderately certain of what it means. Whereas, a rating of <b>5</b> would indicate that you are 100% certain of the meaning and could easily put it into your own words.</i></p>')
-            .center()
-            .print()
-,
-            newText(`<p>When you are ready, to begin the training session click the button below.</p>`)
-                .center()
-                .print()
-,
-            newButton("ready button", "I am ready to begin the training session.")
-                .center()
-                .print()
-                .wait()
-)
 
-
-Template( "TrainingD.txt", row =>
-        newTrial("trainingM",
+Template( "PredictP.txt", row =>
+        newTrial("trainingP",
     defaultText.center().print("center at 50vw","middle at 50vh")
     ,
     // Automatically start and wait for Timer elements when created
     defaultTimer.start().wait()
     ,
     // Mask, shown on screen for 500ms
-    newText("mask","+Training Session+"),
+    newText("mask","+Practice Session+"),
     newTimer("maskTimer", 1000),                       
     getText("mask").remove()
             ,
-    newText("target", `<p>${row.Fragment}.</p>`)
+    newText("target", `<p><i>${row.Fragment}.</i></p>`)
                 .center()
                 .print()
     ,
-    newTooltip("guide", "In this task, you will be shown an expression such as the one below. You will be asked to carefully read the expression and select a rating that corresponds to how well you know its meaning. During this training session, we ask that you select a rating of <b>1</b> for the first expression you are given, a <b>2</b> for the second expression, and so on.")
-        .position("top center")// Display it below the element it attaches to
+    newTooltip("guide", "In this task, you will be shown an incomplete expression such as the one below. You will be asked to carefully read the expression and decide what the final word is likely to be. When you have made your decision you can your keyboard to type your answer in the field below.")
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
     ,
@@ -262,13 +237,12 @@ Template( "TrainingD.txt", row =>
                 .print()
                 .remove()
                 ,
-            newScale("Blank",  "1",  "2",  "3",  "4",  "5")
-                .radio()
-                .labelsPosition("bottom")
-                .default("2")
+            newTextInput("Blank", "Type your answer here..")
+                .log()
+                .lines(0)
+                .size(200, 100)
                 .center()
                 .print()
-                .wait()
         ,
             newText("<p>")
                 .css("font-size","1.4em")
@@ -278,8 +252,8 @@ Template( "TrainingD.txt", row =>
                 .center()
                 .print()
                 .wait(
-                    getScale("Blank")
-                    .test.selected(row.Correct)
+                    getTextInput("Blank")
+                    .test.text(row.Correct)
                     .success( getText("correct").print()
                         )
                     .failure( getText("warning").print()))
@@ -322,36 +296,43 @@ newTrial("TrainE",
         .wait()
 )
 
+Header(
+    newVar("Answ").global()    
+)
+.log( "answ" , getVar("Answ") )
 
 Template( "Idioms.txt", row =>
-        newTrial("ExperimentM",
-            defaultText.center().print("center at 50vw","middle at 50vh")
+        newTrial("ExperimentP",
+    defaultText.center().print("center at 50vw","middle at 50vh")
     ,
     // Automatically start and wait for Timer elements when created
     defaultTimer.start().wait()
     ,
     // Mask, shown on screen for 500ms
-    newText("mask","+Practice Session+"),
+    newText("mask","+++"),
     newTimer("maskTimer", 1000),                       
     getText("mask").remove()
-            ,
-    newText("target", `<p>${row.Idiom}.</p>`)
+    ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+,
+            newText("target", `<p><i>${row.Fragment}.</i></p>`)
                 .center()
                 .print()
-    ,
-    newTooltip("guide", "Carefully read the expression and rate how well you know the meaning of the expression below. Use the full range of the scale to make your decision.")
-        .position("top center")// Display it below the element it attaches to
+,
+newTooltip("guide", "Carefully read the expression and decide what the final word is likely to be. Use your keyboard to type your answer in the field below.")
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
-    ,
-            newScale("Blank",  "1",  "2",  "3",  "4",  "5")
-                .radio()
-                .labelsPosition("bottom")
-                .default("2")
+            ,
+            newTextInput("InputAnsw", "Type your answer here..")
+                .log()
+                .lines(0)
+                .size(200, 100)
                 .center()
                 .print()
-                .wait()
-    ,
+        ,
             newText("<p>")
                 .css("font-size","1.4em")
                 .print()
@@ -362,4 +343,6 @@ Template( "Idioms.txt", row =>
                 .wait()
         ,
                     getText("target").remove()          // End of trial, remove "target"
+
 ))
+
