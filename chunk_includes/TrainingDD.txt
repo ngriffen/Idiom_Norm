@@ -1,0 +1,6 @@
+Fragment	Correct	Incorrect
+She changed her mind	Yes	Try selecting 'Yes'. Explanation: 'mind' relates to the idea of 'thoughts'
+She met her maker	No	Try selecting 'No'. Explanation: there is no relation
+They spread the word	Yes	Try selecting 'Yes'. Explanation: 'spread' relates to the idea of 'broadcasting' and 'word' relates to the idea of 'knowledge'
+He cracked a joke	No	Try selecting 'No'. Explanation: there is no relation
+He threw a fit	No	Try selecting 'No'. Explanation: there is no relation
