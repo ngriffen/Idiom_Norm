@@ -373,6 +373,7 @@ Template( "Idioms.txt", row =>
             newScale("Blank",  "Yes",  "No")
                 .labelsPosition("right")
                 .center()
+                .log()
                 .print()
                 .wait()
     ,
