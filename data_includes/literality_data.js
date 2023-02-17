@@ -375,6 +375,7 @@ Template( "Idioms.txt", row =>
                 .radio()
                 .labelsPosition("bottom")
                 .center()
+                .log()
                 .print()
                 .wait()
     ,
