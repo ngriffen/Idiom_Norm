@@ -6,6 +6,7 @@ Sequence("Intro",
     "Intro2",
     "trainingP",
     "TrainE",
+    "Banal",
     pick(liste=randomize("ExperimentP"),39),
     "break",
     pick(liste,39),
@@ -130,7 +131,7 @@ newTrial("Intro",
     .css("font-size","1.4em")
     .print()
     ,
-    newText("Your task is to carefully read each expression and to decide how they should be completed.")
+    newText("Your task is to carefully read each expression and to help us complete the sentence.")
     ,
     newText("<p>Are you ready?</p>")
     ,
@@ -212,7 +213,7 @@ Template( "PredictP.txt", row =>
     defaultTimer.start().wait()
     ,
     // Mask, shown on screen for 500ms
-    newText("mask","+Practice Session+"),
+    newText("mask","+Training Session+"),
     newTimer("maskTimer", 1000),                       
     getText("mask").remove()
             ,
@@ -220,21 +221,15 @@ Template( "PredictP.txt", row =>
                 .center()
                 .print()
     ,
-    newTooltip("guide", "In this task, you will be shown an incomplete expression such as the one below. You will be asked to carefully read the expression and decide what the final word is likely to be. When you have made your decision you can your keyboard to type your answer in the field below.")
+    newTooltip("guide", "In this task, you will be shown an incomplete expression such as the one below. You will be asked to carefully read the expression and to help us determine what the final word is likely to be. When you have made your decision you can use your keyboard to type your answer in the field below.")
         .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
     ,
-            newText("warning", `<p>Don't worry, this is only pratice! <i>${row.Incorrect}.</i></p>`)
+            newText("warning", `<p><i>${row.Incorrect}.</i></p>`)
                 .color("red")
                 .center()
                 .bold()
-                .remove()
-            ,
-            newText("correct","Great job!")
-                .color("green")
-                .center()
-                .print()
                 .remove()
                 ,
             newTextInput("Blank", "Type your answer here..")
@@ -254,16 +249,11 @@ Template( "PredictP.txt", row =>
                 .wait(
                     getTextInput("Blank")
                     .test.text(row.Correct)
-                    .success( getText("correct").print()
-                        )
                     .failure( getText("warning").print()))
                        ,
             newTimer("wait", 1500)
                 .start()
                 .wait()
-            ,
-            getText("correct")
-                .remove()
             ,
             getText("warning")
                 .remove()
@@ -290,11 +280,56 @@ newTrial("TrainE",
     .css("font-size","1.4em")
     .print()
     ,
-    newButton("ready experiment", "I am ready to begin the experiment.")
+    newButton("ready experiment", "I am ready to begin the experiment")
     .center()
         .print()
         .wait()
 )
+
+Template( "BanalP.txt", row =>
+        newTrial("Banal",
+    defaultText.center().print("center at 50vw","middle at 50vh")
+    ,
+    // Automatically start and wait for Timer elements when created
+    defaultTimer.start().wait()
+    ,
+    // Mask, shown on screen for 500ms
+    newText("mask","+++"),
+    newTimer("maskTimer", 1000),                       
+    getText("mask").remove()
+    ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+,
+            newText("target", `<p><i>${row.Fragment}.</i></p>`)
+                .center()
+                .print()
+,
+newTooltip("guide", "Carefully read the expression and help us determine what the final word is likely to be. Use your keyboard to type your answer in the field below. After the next two expressions, the instructions will be removed so you can focus on the task.")
+        .position("top center")  // Display it below the element it attaches to
+        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
+        .print(getText("target"))   // Attach to the "target" Text element
+            ,
+            newTextInput("InputAnsw", "Type your answer here..")
+                .log()
+                .lines(0)
+                .size(200, 100)
+                .center()
+                .print()
+        ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+            ,
+            newButton("submit", "Submit")
+                .center()
+                .print()
+                .wait()
+        ,
+                    getText("target").remove()          // End of trial, remove "target"
+
+))
 
 Header(
     newVar("Answ").global()    
@@ -320,19 +355,14 @@ Template( "Idioms.txt", row =>
             newText("target", `<p><i>${row.Fragment}.</i></p>`)
                 .center()
                 .print()
-,
-newTooltip("guide", "Carefully read the expression and decide what the final word is likely to be. Use your keyboard to type your answer in the field below.")
-        .position("top center")  // Display it below the element it attaches to
-        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
-        .print(getText("target"))   // Attach to the "target" Text element
-            ,
+        ,
             newTextInput("InputAnsw", "Type your answer here..")
                 .log()
                 .lines(0)
                 .size(200, 100)
                 .center()
                 .print()
-        ,
+,
             newText("<p>")
                 .css("font-size","1.4em")
                 .print()
@@ -343,6 +373,6 @@ newTooltip("guide", "Carefully read the expression and decide what the final wor
                 .wait()
         ,
                     getText("target").remove()          // End of trial, remove "target"
-
 ))
+
 
