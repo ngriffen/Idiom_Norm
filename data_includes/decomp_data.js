@@ -3,11 +3,11 @@ var showProgressBar = false;
 
 Sequence("Intro",
     "Statement",
-    "Intro2",
     "Intro3",
     "Example",
     "trainingD",
     "TrainE",
+    "Banal",
     pick(liste=randomize("ExperimentD"),39),
     "break",
     pick(liste,39),
@@ -42,19 +42,15 @@ newTrial( "break" ,
 
 newTrial( "Example" ,
 defaultText.center().print(),
-newText(`<p><b> In this experiment, you will be asked to judge if the individual words of each expression that you are shown relate to their overall meaning. You will do this by selecting <i>Yes</i> or <i>No</i>.</b></p>`)
+            newText(`<p>An example would be if you were given the expression <i>cover up your tracks</i> and you notice that the word <i>cover</i> is closely related to the idea <i>hide</i>, and the word <i>tracks</i> is related to the <i>evidence of one's actions</i>. As a result, you would select <b>Yes</b> to indicate that the individual words <b>do</b> make a unique contribution to the meaning of the overall expression.</p>`)
                 .center()
                 .print()
 ,
-            newText(`<p>An example would be if you were given the expression <i>cover up your tracks</i> and you notice that the word <i>cover</i> is closely related to the idea <i>hide</i>, while the word <i>tracks</i> refers to evidence of your actions. As a result, you would select <b>Yes</b> to indicate that the individual words of this expression are related to the overall meaning of <i>cover up your tracks</i>.</p>`)
+            newText(`<p>Another example would be if you were given the expression <i>be the cat's whiskers</i> and you notice that there is no relation between the individual words of the expression and its meaning of <i>be the best</i>. As a result, you would select <b>No</b> to indicate that the individual words do <b>not</b> make a unique contribution to the meaning of the overall expression</p>`)
                 .center()
                 .print()
 ,
-            newText(`<p>Another example would be if you were given the expression <i>be the cat's whiskers</i> and you notice that there is no relation between the individual words of the expression and its meaning of <i>be the best</i>. As a result, you would select <b>No</b> to indicate that the individual words of this expression are <b>not</b> related to the overall meaning of <i>be the cat's whiskers</i>.</p>`)
-                .center()
-                .print()
-,
-            newText(`<p>When you are ready, to begin the training session click the button below.</p>`)
+            newText(`<p>When you are ready to begin the training session click the button below.</p>`)
                 .center()
                 .print()
 ,
@@ -156,7 +152,7 @@ newTrial("Intro",
     .css("font-size","1.4em")
     .print()
     ,
-    newText("Your task is to carefully read each expression and decide if the individual words of each expression that you are shown relate to their overall meaning.")
+    newText("Your task is to carefully read each expression and decide if the individual words of each expression make a unique contribution to its overall meaning.")
     ,
     newText("<p>Are you ready?</p>")
     ,
@@ -205,42 +201,18 @@ newTrial("Intro",
         .wait()
 )
 
-newTrial("Intro2",
-    defaultText.center().print()
-    ,
-    newText("<p>Before, you begin you will be given a brief training session.</p>")
-        .bold()
-    ,
-    newText("This will allow you to become comfortable with the controls before you begin the task.")
-    ,
-    newText("<p>")
-    .css("font-size","1.4em")
-    .print()
-    ,
-    newText("When you are ready, please click the button below.")
-    ,
-    newText("<p>")
-    .css("font-size","1.4em")
-    .print()
-    ,
-    newButton("cont button", "Continue")
-    .center()
-        .print()
-        .wait()
-)
-
 newTrial("Intro3",
     defaultText.center().print()
 ,
-            newText(`<p><b> In this experiment, you will be asked to judge if the individual words of each expression that you are shown relate to their overall meaning.</b></p>`)
+            newText(`<p><b> In this experiment, you will be asked to judge if the individual words of each expression make a unique contribution to its overall meaning.</b></p>`)
                 .center()
                 .print()
 ,
-            newText(`<p>Your task is to select <b>Yes</b> or <b>No</b> to indicate your judgement on whether the individual words of each expression that you are shown relate to its overall meaning.</p>`)
+            newText(`<p>Your task is to select <b>Yes</b> or <b>No</b> to indicate your judgement.</p>`)
                 .center()
                 .print()
 ,
-            newText('<p><i>If you select <b>Yes</b>, this would indicate that the individual words of the expression that you are shown <b>does</b> relate to its overall meaning. If you select <b>No</b>, this would indicate that the individual words of the expression that you are shown does <b>not</b> relate to its overall meaning.</i></p>')
+            newText('<p><i>If you select <b>Yes</b>, this would indicate that you believe that the individual words of the expression that you are shown <b>does</b> make a unique contribution to its overall meaning. If you select <b>No</b>, this would indicate that the individual words of the expression that you are shown does <b>not</b> make a unique contribution its overall meaning.</i></p>')
             .center()
             .print()
 ,
@@ -273,23 +245,17 @@ Template( "TrainingDD.txt", row =>
                 .center()
                 .print()
     ,
-    newTooltip("guide", "In this task, you will be shown an expression such as the one below. You will be asked to carefully read the expression and to select <b>Yes</b> or <b>No</b> to indicate your judgement on whether the individual words of each expression that you are shown relate to its overall meaning. During this training session, do your best to practice this judgement.")
+    newTooltip("guide", "In this task, you will be shown an expression such as the one below. You will be asked to carefully read the expression and to select <b>Yes</b> or <b>No</b> to indicate whether or not the individual words of the expression make a unique contribution to its overall meaning.")
         .position("top center")// Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
     ,
-            newText("warning", `<p>Don't worry, this is only pratice! <i>${row.Incorrect}.</i></p>`)
+            newText("warning", `<p><i>${row.Incorrect}.</i></p>`)
                 .color("red")
                 .center()
                 .bold()
                 .remove()
-            ,
-            newText("correct","Great job!")
-                .color("green")
-                .center()
-                .print()
-                .remove()
-                ,
+        ,
             newScale("Blank",  "Yes",  "No")
                 .labelsPosition("right")
                 .center()
@@ -306,19 +272,59 @@ Template( "TrainingDD.txt", row =>
                 .wait(
                     getScale("Blank")
                     .test.selected(row.Correct)
-                    .success( getText("correct").print()
-                        )
                     .failure( getText("warning").print()))
                        ,
             newTimer("wait", 1500)
                 .start()
                 .wait()
             ,
-            getText("correct")
-                .remove()
-            ,
             getText("warning")
                 .remove()
+        ,
+                    getText("target").remove()          // End of trial, remove "target"
+        )
+)
+
+Template( "Banal.txt", row =>
+        newTrial("Banal",
+    defaultText.center().print("center at 50vw","middle at 50vh")
+    ,
+    // Automatically start and wait for Timer elements when created
+    defaultTimer.start().wait()
+    ,
+    // Mask, shown on screen for 500ms
+    newText("mask","+Training Session+"),
+    newTimer("maskTimer", 1000),                       
+    getText("mask").remove()
+            ,
+    newText("target", `<p>${row.Fragment}.</p>`)
+                .center()
+                .print()
+    ,
+    newTooltip("guide", "In this task, you will be shown an expression such as the one below. You will be asked to carefully read the expression and to select <b>Yes</b> or <b>No</b> to indicate on whether the individual words of the expression make a unique contribution to its overall meaning.")
+        .position("top center")// Display it below the element it attaches to
+        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
+        .print(getText("target"))   // Attach to the "target" Text element
+        ,
+            newScale("Blank",  "Yes",  "No")
+                .labelsPosition("right")
+                .center()
+                .log()
+                .print()
+                .wait()
+        ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+            ,
+            newButton("submit", "Submit")
+                .center()
+                .print()
+                .wait()
+                       ,
+            newTimer("wait", 1500)
+                .start()
+                .wait()
         ,
                     getText("target").remove()          // End of trial, remove "target"
         )
@@ -364,11 +370,6 @@ Template( "Idioms.txt", row =>
     newText("target", `<p>${row.Idiom}.</p>`)
                 .center()
                 .print()
-    ,
-    newTooltip("guide", "Carefully read the expression and decide whether the individual words of the expression relate to its overall meaning. Select <b>Yes</b> or <b>No</b> to to make your decision.")
-        .position("top center")// Display it below the element it attaches to
-        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
-        .print(getText("target"))   // Attach to the "target" Text element
     ,
             newScale("Blank",  "Yes",  "No")
                 .labelsPosition("right")
