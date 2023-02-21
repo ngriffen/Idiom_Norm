@@ -3,11 +3,11 @@ var showProgressBar = false;
 
 Sequence("Intro",
     "Statement",
-    "Intro2",
     "Intro3",
     "Example",
     "trainingM",
     "TrainE",
+    "Banal",
     pick(liste=randomize("ExperimentM"),39),
     "break",
     pick(liste,39),
@@ -42,19 +42,15 @@ newTrial( "break" ,
 
 newTrial( "Example" ,
 defaultText.center().print(),
-newText(`<p><b> In this experiment, you will be asked to judge the <b>Meaningfulness</b> of each expression that you are shown.</b></p>`)
+            newText(`<p>An example would be if you were given the expression <i>she got cold feet</i> and you knew its meaning to be <i>to become nervous about something</i> with high confidence. As a result, you might choose a rating on the higher end of the scale to indicate your knowledge of its meaning.</p>`)
                 .center()
                 .print()
 ,
-            newText(`<p>An example would be if you were given the expression <i>she got cold feet</i> and you knew its meaning to be <i>to not get married</i> with absolute certainty. As a result, you could give a rating of <b>5</b> to indicate your knowledge of its meaning.</p>`)
+            newText(`<p>Another example would be if you were given the expression <i>he counted sheep</i> and you had low confidence that you knew its meaning. As a result, you could give a rating at the lower end of the scale to indicate your lack of knowledge about its meaning.</p>`)
                 .center()
                 .print()
 ,
-            newText(`<p>Another example would be if you were given the expression <i>he counted sheep</i> and you had no idea what this expression meant. As a result, you could give a rating of <b>1</b> to indicate your lack of knowledge of its meaning.</p>`)
-                .center()
-                .print()
-,
-            newText(`<p>When you are ready, to begin the training session click the button below.</p>`)
+            newText(`<p>When you are ready to begin the training session click the button below.</p>`)
                 .center()
                 .print()
 ,
@@ -156,7 +152,7 @@ newTrial("Intro",
     .css("font-size","1.4em")
     .print()
     ,
-    newText("Your task is to carefully read each expression and to decide how well you know its meaning.")
+    newText("Your task is to carefully read each expression and to let us know how well you know its meaning.")
     ,
     newText("<p>Are you ready?</p>")
     ,
@@ -205,30 +201,6 @@ newTrial("Intro",
         .wait()
 )
 
-newTrial("Intro2",
-    defaultText.center().print()
-    ,
-    newText("<p>Before, you begin you will be given a brief training session.</p>")
-        .bold()
-    ,
-    newText("This will allow you to become comfortable with the controls before you begin the task.")
-    ,
-    newText("<p>")
-    .css("font-size","1.4em")
-    .print()
-    ,
-    newText("When you are ready, please click the button below.")
-    ,
-    newText("<p>")
-    .css("font-size","1.4em")
-    .print()
-    ,
-    newButton("cont button", "Continue")
-    .center()
-        .print()
-        .wait()
-)
-
 newTrial("Intro3",
     defaultText.center().print()
 ,
@@ -236,11 +208,11 @@ newTrial("Intro3",
                 .center()
                 .print()
 ,
-            newText(`<p>Your task is to rate how well you know the meaning of each expression you are given by using the full range of the <b>1-5</b> scale to make your decision.</p>`)
+            newText(`<p>Your task is to rate how well you know the meaning of each expression you are given by using the full range of the <b>1-5</b> scale to give us your input.</p>`)
                 .center()
                 .print()
 ,
-            newText('<p><i>Normally, a rating of <b>1</b> would indicate that you have absolutely no idea what the expression means. A rating of <b>3</b> would indicate that you are moderately certain of what it means. Whereas, a rating of <b>5</b> would indicate that you are 100% certain of the meaning and could easily put it into your own words.</i></p>')
+            newText('<p><i>Normally, a rating of <b>1</b> would indicate that you have absolutely no idea what an expression means. A rating of <b>3</b> would indicate that you are moderately certain of its meaning. Whereas, a rating of <b>5</b> would indicate that you are 100% certain of the meaning and could easily put it into your own words.</i></p>')
             .center()
             .print()
 ,
@@ -274,23 +246,11 @@ Template( "TrainingD.txt", row =>
                 .center()
                 .print()
     ,
-    newTooltip("guide", "In this task, you will be shown an expression such as the one below. You will be asked to carefully read the expression and select a rating that corresponds to how well you know its meaning. During this training session, we ask that you select a rating of <b>1</b> for the first expression you are given, a <b>2</b> for the second expression, and so on.")
+    newTooltip("guide", "In this task, you will be shown an expression such as the one below. You will be asked to carefully read the expression and to select a rating that corresponds to how well you know its meaning. When you have made your decision, select the rating that you find most appropriate.")
         .position("top center")// Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
     ,
-            newText("warning", `<p>Don't worry, this is only pratice! <i>${row.Incorrect}.</i></p>`)
-                .color("red")
-                .center()
-                .bold()
-                .remove()
-            ,
-            newText("correct","Great job!")
-                .color("green")
-                .center()
-                .print()
-                .remove()
-                ,
             newScale("Blank",  "1",  "2",  "3",  "4",  "5")
                 .radio()
                 .labelsPosition("bottom")
@@ -305,26 +265,60 @@ Template( "TrainingD.txt", row =>
             newButton("submit", "Submit")
                 .center()
                 .print()
-                .wait(
-                    getScale("Blank")
-                    .test.selected(row.Correct)
-                    .success( getText("correct").print()
-                        )
-                    .failure( getText("warning").print()))
+                .wait()
                        ,
             newTimer("wait", 1500)
                 .start()
                 .wait()
-            ,
-            getText("correct")
-                .remove()
-            ,
-            getText("warning")
-                .remove()
         ,
                     getText("target").remove()          // End of trial, remove "target"
-        )
-)
+        ))
+
+Template( "Banal.txt", row =>
+        newTrial("Banal",
+    defaultText.center().print("center at 50vw","middle at 50vh")
+    ,
+    // Automatically start and wait for Timer elements when created
+    defaultTimer.start().wait()
+    ,
+    // Mask, shown on screen for 500ms
+    newText("mask","+++"),
+    newTimer("maskTimer", 1000),                       
+    getText("mask").remove()
+            ,
+    newText("target", `<p>${row.Fragment}.</p>`)
+                .center()
+                .print()
+    ,
+    newTooltip("guide", "Carefully read the expression and select a rating that corresponds to how well you know its meaning. After the next two expressions, the instructions will be removed so you can focus on the task.")
+        .position("top center")// Display it below the element it attaches to
+        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
+        .print(getText("target"))   // Attach to the "target" Text element
+    ,
+            newScale("Blank",  "1",  "2",  "3",  "4",  "5")
+                .radio()
+                .labelsPosition("bottom")
+                .center()
+                .print()
+                .log()
+                .wait()
+        ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+            ,
+            newButton("submit", "Submit")
+                .center()
+                .print()
+                .wait()
+                       ,
+            newTimer("wait", 1500)
+                .start()
+                .wait()
+        ,
+                    getText("target").remove()          // End of trial, remove "target"
+        ))
+
 
 newTrial("TrainE",
     defaultText.center().print()
@@ -344,7 +338,7 @@ newTrial("TrainE",
     .css("font-size","1.4em")
     .print()
     ,
-    newButton("ready experiment", "I am ready to begin the experiment.")
+    newButton("ready experiment", "I am ready to begin the experiment")
     .center()
         .print()
         .wait()
@@ -366,11 +360,6 @@ Template( "Idioms.txt", row =>
     newText("target", `<p>${row.Idiom}.</p>`)
                 .center()
                 .print()
-    ,
-    newTooltip("guide", "Carefully read the expression and rate how well you know its meaning. Use the full range of the scale to make your decision.")
-        .position("top center")// Display it below the element it attaches to
-        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
-        .print(getText("target"))   // Attach to the "target" Text element
     ,
             newScale("Blank",  "1",  "2",  "3",  "4",  "5")
                 .radio()
