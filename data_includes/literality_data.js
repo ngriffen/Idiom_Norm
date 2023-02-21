@@ -3,11 +3,11 @@ var showProgressBar = false;
 
 Sequence("Intro",
     "Statement",
-    "Intro2",
     "Intro3",
     "Example",
     "trainingL",
     "TrainE",
+    "Banal",
     pick(liste=randomize("ExperimentL"),39),
     "break",
     pick(liste,39),
@@ -42,19 +42,15 @@ newTrial( "break" ,
 
 newTrial( "Example" ,
 defaultText.center().print(),
-newText(`<p><b> In this experiment, you will be asked to judge the <b>Literality</b> of each expression that you are shown.</b></p>`)
+            newText(`<p>An example would be if you were given the expression <i>she got cold feet</i> and you judge that it could be highly interpretable as literal. As a result, you might choose a rating on the higher end of the scale to indicate your belief in its literal interpretability.</p>`)
                 .center()
                 .print()
 ,
-            newText(`<p>An example would be if you were given the expression <i>she got cold feet</i> and you judge that it could be moderately interpretable as literal. As a result, you could give a rating of <b>3</b> to indicate your belief about how literally interpretable the expression is.</p>`)
+            newText(`<p>Another example would be if you were given the expression <i>he kicked the bucket</i> and you judge that it would be unlikely for this expression to be interpreted as literal. As a result, you could give a rating at the lower end of the scale to indicate your belief in its lack of literal interpretability.</p>`)
                 .center()
                 .print()
 ,
-            newText(`<p>Another example would be if you were given the expression <i>he counted sheep</i> and you judge that it seems very unlikely to be interpreted as literal. As a result, you could give a rating of <b>1</b> to indicate your belief about how literally interpretable the expression is.</p>`)
-                .center()
-                .print()
-,
-            newText(`<p>When you are ready, to begin the training session click the button below.</p>`)
+            newText(`<p>When you are ready to begin the training session click the button below.</p>`)
                 .center()
                 .print()
 ,
@@ -156,7 +152,7 @@ newTrial("Intro",
     .css("font-size","1.4em")
     .print()
     ,
-    newText("Your task is to carefully read each expression and to rate how literally interpretable the expression is.")
+    newText("Your task is to carefully read each expression and to let us know how literally interpretable you find it.")
     ,
     newText("<p>Are you ready?</p>")
     ,
@@ -205,42 +201,18 @@ newTrial("Intro",
         .wait()
 )
 
-newTrial("Intro2",
-    defaultText.center().print()
-    ,
-    newText("<p>Before, you begin you will be given a brief training session.</p>")
-        .bold()
-    ,
-    newText("This will allow you to become comfortable with the controls before you begin the task.")
-    ,
-    newText("<p>")
-    .css("font-size","1.4em")
-    .print()
-    ,
-    newText("When you are ready, please click the button below.")
-    ,
-    newText("<p>")
-    .css("font-size","1.4em")
-    .print()
-    ,
-    newButton("cont button", "Continue")
-    .center()
-        .print()
-        .wait()
-)
-
 newTrial("Intro3",
     defaultText.center().print()
 ,
-            newText(`<p><b> In this experiment, you will be asked to judge the <b>Literality</b> of each expression that you are shown.</b></p>`)
+            newText(`<p><b> In this experiment, you will be asked to judge the <b>Literal Interpretability</b> of each expression that you are shown.</b></p>`)
                 .center()
                 .print()
 ,
-            newText(`<p>Your task is to rate how literally interpretable the expression you are given is by using the full range of the <b>1-5</b> scale to make your decision.</p>`)
+            newText(`<p>Your task is to rate how literally interpretable the expression you are given is by using the full range of the <b>1-5</b> scale to give us your input.</p>`)
                 .center()
                 .print()
 ,
-            newText('<p><i>Normally, a rating of <b>1</b> would indicate that the expression does not have any possible literal interpretation and therefore is completely implausible literally. A rating of <b>5</b> would indicate that the expression definitely has a clear and well-formed literal interpretation that is very plausible. Intermediate values of the scale should reflect your judgments of the plausibility of these phrases interpreted literally.</i></p>')
+            newText('<p><i>Normally, a rating of <b>1</b> would indicate that the expression does not have any possible literal interpretation and therefore is completely implausible when interpreted as literal. A rating of <b>5</b> would indicate that the expression definitely has a clear and well-formed literal interpretation that is very plausible. Whereas intermediate ratings should reflect a judgement that the expression has a plausible literal interpretation.</i></p>')
             .center()
             .print()
 ,
@@ -273,23 +245,11 @@ Template( "TrainingD.txt", row =>
                 .center()
                 .print()
     ,
-    newTooltip("guide", "In this task, you will be shown an expression such as the one below. You will be asked to carefully read the expression and select a rating that corresponds to how literally interpretable the expression is. During this training session, we ask that you select a rating of <b>1</b> for the first expression you are given, a <b>2</b> for the second expression, and so on.")
+    newTooltip("guide", "In this task, you will be shown an expression such as the one below. You will be asked to carefully read the expression and to select a rating that corresponds to how literally interpretable you find the expression to be. When you have made your decision, select the rating that you find most appropriate.")
         .position("top center")// Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
     ,
-            newText("warning", `<p>Don't worry, this is only pratice! <i>${row.Incorrect}.</i></p>`)
-                .color("red")
-                .center()
-                .bold()
-                .remove()
-            ,
-            newText("correct","Great job!")
-                .color("green")
-                .center()
-                .print()
-                .remove()
-                ,
             newScale("Blank",  "1",  "2",  "3",  "4",  "5")
                 .radio()
                 .labelsPosition("bottom")
@@ -304,26 +264,60 @@ Template( "TrainingD.txt", row =>
             newButton("submit", "Submit")
                 .center()
                 .print()
-                .wait(
-                    getScale("Blank")
-                    .test.selected(row.Correct)
-                    .success( getText("correct").print()
-                        )
-                    .failure( getText("warning").print()))
-                       ,
+                .wait()
+,
             newTimer("wait", 1500)
                 .start()
                 .wait()
-            ,
-            getText("correct")
-                .remove()
-            ,
-            getText("warning")
-                .remove()
         ,
                     getText("target").remove()          // End of trial, remove "target"
         )
 )
+
+Template( "Banal.txt", row =>
+        newTrial("Banal",
+    defaultText.center().print("center at 50vw","middle at 50vh")
+    ,
+    // Automatically start and wait for Timer elements when created
+    defaultTimer.start().wait()
+    ,
+    // Mask, shown on screen for 500ms
+    newText("mask","+++"),
+    newTimer("maskTimer", 1000),                       
+    getText("mask").remove()
+            ,
+    newText("target", `<p>${row.Fragment}.</p>`)
+                .center()
+                .print()
+    ,
+    newTooltip("guide", "Carefully read the expression and select a rating that corresponds to how literally interpretable you find the expression to be. After the next two expressions, the instructions will be removed so you can focus on the task.")
+        .position("top center")// Display it below the element it attaches to
+        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
+        .print(getText("target"))   // Attach to the "target" Text element
+    ,
+            newScale("Blank",  "1",  "2",  "3",  "4",  "5")
+                .radio()
+                .labelsPosition("bottom")
+                .center()
+                .print()
+                .log()
+                .wait()
+        ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+            ,
+            newButton("submit", "Submit")
+                .center()
+                .print()
+                .wait()
+                       ,
+            newTimer("wait", 1500)
+                .start()
+                .wait()
+        ,
+                    getText("target").remove()          // End of trial, remove "target"
+        ))
 
 newTrial("TrainE",
     defaultText.center().print()
@@ -365,11 +359,6 @@ Template( "Idioms.txt", row =>
     newText("target", `<p>${row.Idiom}.</p>`)
                 .center()
                 .print()
-    ,
-    newTooltip("guide", "Carefully read the expression and rate how familiar you are with it. Use the full range of the scale to make your decision.")
-        .position("top center")// Display it below the element it attaches to
-        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
-        .print(getText("target"))   // Attach to the "target" Text element
     ,
             newScale("Blank",  "1",  "2",  "3",  "4",  "5")
                 .radio()
