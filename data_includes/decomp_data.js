@@ -274,7 +274,7 @@ Template( "TrainingDD.txt", row =>
                     .test.selected(row.Correct)
                     .failure( getText("warning").print()))
                        ,
-            newTimer("wait", 1500)
+            newTimer("wait", 500)
                 .start()
                 .wait()
             ,
