@@ -267,7 +267,7 @@ Template( "TrainingD.txt", row =>
                 .print()
                 .wait()
                        ,
-            newTimer("wait", 1500)
+            newTimer("wait", 500)
                 .start()
                 .wait()
         ,
