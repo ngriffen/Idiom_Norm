@@ -3,10 +3,15 @@ var showProgressBar = false;
 
 Sequence("Intro",
     "Statement",
+    "Intro1",
     "Intro2",
-    "trainingP",
-    "TrainE",
     "Banal",
+    "Banal2",
+    "Banal3",
+    "TrainE",
+    "TrainE2",
+    "Pretest",
+    "Pretest2",  
     pick(liste=randomize("ExperimentP"),39),
     "break",
     pick(liste,39),
@@ -15,26 +20,27 @@ Sequence("Intro",
     "Outro2",
     "end"
 )
-  
 
 newTrial( "break" ,
                 newText("<p>This is a break.</p>")
-                .css("font-size","1.4em")
+                .css("font-size","1.8em")
                 .center()
                 .color("blue")
                 .print()    
                 ,
                 newText("<p>Press the button below when you are ready to continue.</p>")
                 .center()
+                .css("font-size","1.8em")
                 .color("blue")
-                .print()  
+                .print()
                 ,
                  newText("<p>")
-                .css("font-size","1.4em")
+                .css("font-size","1.8em")
                 .print()             
                 ,
-                newButton("breakbutton", "I am ready to continue")
+                newButton("breakbutton", "Continue")
                 .center()
+                .css("font-size","1.8em")
                 .print()
                 .wait()
                 
@@ -44,10 +50,12 @@ newTrial( "Outro",
     defaultText.center().print()
      ,
      newText("<p>Thank you for your participation!</p>")
+     .css("font-size","1.8em")
         .color("blue")     
         .bold()
      ,
      newText("<p>To complete this experiment, please enter the requested information below.</p>")
+     .css("font-size","1.8em")
            .center()
            .print()
     ,
@@ -98,11 +106,13 @@ newTrial( "Outro",
     defaultText.center().print()
      ,
     newText("<p>You need to certify your completion of this experiment, click the link below!</p>")
+    .css("font-size","1.8em")
         .color("blue")     
         .bold()
      ,
      newText("<p><a href='https://app.prolific.co/submissions/complete?cc=50DDF214' target=_'blank' >"+
           "Confirm my participation on Prolific.</a></p>")
+           .scaling("page")
            .center()
            .print()
            .wait()
@@ -116,26 +126,12 @@ Header(
 newTrial("Intro",
     defaultText.center().print()
     ,
-    newText("<p>Hello! Welcome to the experiment!</p>")
+    newText("<p>Hello! Welcome to our study!</p>")
+    .css("font-size","1.8em")
         .bold()
     ,
-    newText("In this task, you will be shown a series of incomplete expressions.")
-    ,
-    newText("<p>")
-    .css("font-size","1.4em")
-    .print()
-    ,
-    newText("Each expression that you will be shown will be missing its final word.")
-    ,
-    newText("<p>")
-    .css("font-size","1.4em")
-    .print()
-    ,
-    newText("Your task is to carefully read each expression and to help us complete the sentence.")
-    ,
-    newText("<p>Are you ready?</p>")
-    ,
     newText("Please type in your Prolific ID below.")
+    .css("font-size","1.8em")
     .bold()
     ,
     newTextInput("inputID", "")
@@ -150,10 +146,11 @@ newTrial("Intro",
         .remove()
     ,
     newButton("prolificID button", "I have entered my Prolific ID")
+    .css("font-size","1.8em")
         .center()
         .print()
         // Only validate a click on Start when inputID has been filled
-        .wait(  // Make sure the TextInput has been filled
+        .wait(// Make sure the TextInput has been filled
             getTextInput("inputID")
                 .testNot.text("")
                 .failure( getText("warning").print() )
@@ -163,19 +160,60 @@ newTrial("Intro",
     getVar("inputID").set( getTextInput("inputID") )
 )
 
+    newTrial("Intro1",
+    defaultText.center().print()
+    ,
+    newText("For this study, you will be shown a series of incomplete expressions.")
+    .css("font-size","1.8em")
+    ,
+    newText("<p>")
+    .css("font-size","2em")
+    .print()
+    ,
+    newText("Each expression that you will be shown will be missing its final word.")
+    .css("font-size","1.8em")
+    ,
+    newText("<p>")
+    .css("font-size","2em")
+    .print()
+    ,
+    newText("Your task is to carefully read each expression you are shown.")
+    .css("font-size","1.8em")
+    ,
+    newText("<p>")
+    .css("font-size","2em")
+    .print()
+    ,
+    newText("Then you will give us your best guess on what the final word might be.")
+    .css("font-size","1.8em")
+    ,
+    newText("<p>")
+    .css("font-size","2em")
+    .print()
+    ,
+    newButton("cont", "Continue")
+    .center()
+    .css("font-size","1.8em")
+        .print()
+        .wait()
+    )
+    
+
     newTrial( "Statement",
     defaultText.center().print()
      ,
      newText("<p> In order to continue, please provide your consent to participate in this experiment.</p>")
+        .css("font-size","1.8em")
         .bold()
      ,
      newText("<a href='https://e1.pcloud.link/publink/show?code=XZ3q8bZfAWom9MGCAYL3MYlk4hwgSAhGtkX' target=_'blank' >"+
           "Click here if you would like to review the information sheet.</a>")
-         .css("margin","1em")
+         .css("margin","1.8em")
          .print()
      ,
      newButton("consent button2", "I consent")
         .center()
+        .css("font-size","1.8em")
         .print()
         .wait()
 )
@@ -183,105 +221,87 @@ newTrial("Intro",
 newTrial("Intro2",
     defaultText.center().print()
     ,
-    newText("<p>Before, you begin you will be given a brief training session.</p>")
+    newText("<p>Before you begin you will be given a brief training session.</p>")
+        .css("font-size","1.8em")
         .bold()
     ,
-    newText("This will allow you to become comfortable with the controls before you begin the task.")
+    newText("This will allow you to become comfortable with this task.")
+    .css("font-size","1.8em")
     ,
     newText("<p>")
-    .css("font-size","1.4em")
+    .css("font-size","2em")
+    .print()
+        ,
+    newText("At the end of the training session, you will be shown how other participants typically answered.")
+    .css("font-size","1.8em")
+     ,
+    newText("<p>")
+    .css("font-size","2em")
     .print()
     ,
-    newText("When you are ready, please click the button below.")
+    newText("When you are ready, click the button below.")
+    .css("font-size","1.8em")
     ,
     newText("<p>")
-    .css("font-size","1.4em")
+    .css("font-size","2em")
     .print()
     ,
-    newButton("ready button", "I am ready to begin the training session")
+    newButton("ready button", "Begin the training session")
     .center()
+    .css("font-size","1.8em")
         .print()
         .wait()
-)
-
-
-Template( "PredictP.txt", row =>
-        newTrial("trainingP",
-    defaultText.center().print("center at 50vw","middle at 50vh")
-    ,
-    // Automatically start and wait for Timer elements when created
-    defaultTimer.start().wait()
-    ,
-    // Mask, shown on screen for 500ms
-    newText("mask","+Training Session+"),
-    newTimer("maskTimer", 1000),                       
-    getText("mask").remove()
-            ,
-    newText("target", `<p><i>${row.Fragment}.</i></p>`)
-                .center()
-                .print()
-    ,
-    newTooltip("guide", "In this task, you will be shown an incomplete expression such as the one below. You will be asked to carefully read the expression and to help us determine what the final word is likely to be. When you have made your decision you can use your keyboard to type your answer in the field below.")
-        .position("top center")  // Display it below the element it attaches to
-        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
-        .print(getText("target"))   // Attach to the "target" Text element
-    ,
-            newText("warning", `<p><i>${row.Incorrect}.</i></p>`)
-                .color("red")
-                .center()
-                .bold()
-                .remove()
-                ,
-            newTextInput("Blank", "Type your answer here..")
-                .log()
-                .lines(0)
-                .size(200, 100)
-                .center()
-                .print()
-        ,
-            newText("<p>")
-                .css("font-size","1.4em")
-                .print()
-            ,
-            newButton("submit", "Submit")
-                .center()
-                .print()
-                .wait(
-                    getTextInput("Blank")
-                    .test.text(row.Correct)
-                    .failure( getText("warning").print()))
-                       ,
-            newTimer("wait", 500)
-                .start()
-                .wait()
-            ,
-            getText("warning")
-                .remove()
-        ,
-                    getText("target").remove()          // End of trial, remove "target"
-        )
 )
 
 newTrial("TrainE",
     defaultText.center().print()
     ,
-    newText("<p>You have completed the training session</p>")
+    newText("<p>The training session has been completed.</p>")
+    .css("font-size","1.8em")
         .bold()
     ,
-    newText("You may now begin the experiment.")
+        newText("<p>The typical responses that other participants gave were the following:</p>")
+    .css("font-size","1.8em")
+    ,
+    newText("She mailed his <i>letters</i>.")
+    .css("font-size","1.5em"),
+    newText("He bumped her <i>fee</i>.")
+    .css("font-size","1.5em"),
+    newText("She achieved her <i>goals</i>.")
+    .css("font-size","1.5em"),
+    newText("He pulled her <i>leg</i>.")
+    .css("font-size","1.5em")
     ,
     newText("<p>")
-    .css("font-size","1.4em")
+    .css("font-size","2em")
     .print()
     ,
-    newText("When you are ready, please click the button below.")
-    ,
-    newText("<p>")
-    .css("font-size","1.4em")
-    .print()
-    ,
-    newButton("ready experiment", "I am ready to begin the experiment")
+    newButton("readyish", "Continue")
     .center()
+    .css("font-size","1.8em")
+        .print()
+        .wait()
+)
+
+newTrial("TrainE2",
+defaultText.center().print(),
+    newText("You may now begin the main task.")
+    .css("font-size","1.8em")
+    ,
+    newText("<p>")
+    .css("font-size","2em")
+    .print()
+    ,
+    newText("When you are ready, click the button below.")
+    .css("font-size","1.8em")
+    ,
+    newText("<p>")
+    .css("font-size","2em")
+    .print()
+    ,
+    newButton("ready experiment", "Begin the main task")
+    .center()
+    .css("font-size","1.8em")
         .print()
         .wait()
 )
@@ -303,34 +323,268 @@ Template( "BanalP.txt", row =>
                 .print()
 ,
             newText("target", `<p><i>${row.Fragment}.</i></p>`)
+            .css("font-size","1.4em")
                 .center()
                 .print()
-,
-newTooltip("guide", "Carefully read the expression and help us determine what the final word is likely to be. Use your keyboard to type your answer in the field below. After the next two expressions, the instructions will be removed so you can focus on the task.")
+    ,
+newTooltip("guide", "<p>Carefully read the expression and give us your best guess for what the final word of the expression might be.</p><p><b> **After the next two expressions, the instructions will be removed so you can focus on the task.**</b></p>")
+        .css("font-size","1.2em")
         .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
-            newTextInput("InputAnsw", "Type your answer here..")
+            newTextInput("InputAnsw", "")
                 .log()
                 .lines(0)
                 .size(200, 100)
                 .center()
                 .print()
+    ,
+        newText("warning", "Please type your answer in the field above.")
+        .color("red")
+        .bold()
+        .remove()
         ,
             newText("<p>")
                 .css("font-size","1.4em")
                 .print()
             ,
             newButton("submit", "Submit")
+            .css("font-size","1.4em")
                 .center()
                 .print()
-                .wait()
+                .wait(// Make sure the TextInput has been filled
+            getTextInput("InputAnsw")
+                .testNot.text("")
+                .failure( getText("warning").print() ))
+        )
+        ,
+                    getText("target").remove()          // End of trial, remove "target"
+
+)
+
+Template( "BanalP2.txt", row =>
+        newTrial("Banal2",
+    defaultText.center().print("center at 50vw","middle at 50vh")
+    ,
+    // Automatically start and wait for Timer elements when created
+    defaultTimer.start().wait()
+    ,
+    // Mask, shown on screen for 500ms
+    newText("mask","+++"),
+    newTimer("maskTimer", 1000),                       
+    getText("mask").remove()
+    ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+,
+            newText("target", `<p><i>${row.Fragment}.</i></p>`)
+            .css("font-size","1.4em")
+                .center()
+                .print()
+,
+newTooltip("guide", "Remember to type a single word without punctuation.")
+        .css("font-size","1.5em")
+        .position("top center")  // Display it below the element it attaches to
+        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
+        .print(getText("target"))   // Attach to the "target" Text element
+            ,
+            newTextInput("InputAnsw", "")
+                .log()
+                .lines(0)
+                .size(200, 100)
+                .center()
+                .print()
+    ,
+        newText("warning", "Please type your answer in the field above.")
+        .color("red")
+        .bold()
+        .remove()
+        ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+            ,
+            newButton("submit", "Submit")
+            .css("font-size","1.4em")
+                .center()
+                .print()
+                .wait(// Make sure the TextInput has been filled
+            getTextInput("InputAnsw")
+                .testNot.text("")
+                .failure( getText("warning").print() ))
         ,
                     getText("target").remove()          // End of trial, remove "target"
 
 ))
 
+Template( "BanalP3.txt", row =>
+        newTrial("Banal3",
+    defaultText.center().print("center at 50vw","middle at 50vh")
+    ,
+    // Automatically start and wait for Timer elements when created
+    defaultTimer.start().wait()
+    ,
+    // Mask, shown on screen for 500ms
+    newText("mask","+++"),
+    newTimer("maskTimer", 1000),                       
+    getText("mask").remove()
+    ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+,
+            newText("target", `<p><i>${row.Fragment}.</i></p>`)
+            .css("font-size","1.4em")
+                .center()
+                .print()
+            ,
+            newTextInput("InputAnsw", "")
+                .log()
+                .lines(0)
+                .size(200, 100)
+                .center()
+                .print()
+    ,
+        newText("warning", "Please type your answer in the field above.")
+        .color("red")
+        .bold()
+        .remove()
+        ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+            ,
+            newButton("submit", "Submit")
+            .css("font-size","1.4em")
+                .center()
+                .print()
+                .wait(// Make sure the TextInput has been filled
+            getTextInput("InputAnsw")
+                .testNot.text("")
+                .failure( getText("warning").print() ))
+        ,
+                    getText("target").remove()          // End of trial, remove "target"
+
+))
+
+Template( "PretestP.txt", row =>
+        newTrial("Pretest",
+    defaultText.center().print("center at 50vw","middle at 50vh")
+    ,
+    // Automatically start and wait for Timer elements when created
+    defaultTimer.start().wait()
+    ,
+    // Mask, shown on screen for 500ms
+    newText("mask","+++"),
+    newTimer("maskTimer", 1000),                       
+    getText("mask").remove()
+    ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+,
+            newText("target", `<p><i>${row.Fragment}.</i></p>`)
+            .css("font-size","1.4em")
+                .center()
+                .print()
+    ,
+newTooltip("guide", "<p>Carefully read the expression and give us your best guess for what the final word of the expression might be.</p><p><b> **After the next two expressions, the instructions will be removed so you can focus on the task.**</b></p>")
+        .css("font-size","1.2em")
+        .position("top center")  // Display it below the element it attaches to
+        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
+        .print(getText("target"))   // Attach to the "target" Text element
+            ,
+            newTextInput("InputAnsw", "")
+                .log()
+                .lines(0)
+                .size(200, 100)
+                .center()
+                .print()
+    ,
+        newText("warning", "Please type your answer in the field above.")
+        .color("red")
+        .bold()
+        .remove()
+        ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+            ,
+            newButton("submit", "Submit")
+            .css("font-size","1.4em")
+                .center()
+                .print()
+                .wait(// Make sure the TextInput has been filled
+            getTextInput("InputAnsw")
+                .testNot.text("")
+                .failure( getText("warning").print() ))
+        )
+        ,
+                    getText("target").remove()          // End of trial, remove "target"
+
+)
+
+Template( "PretestP2.txt", row =>
+        newTrial("Pretest2",
+    defaultText.center().print("center at 50vw","middle at 50vh")
+    ,
+    // Automatically start and wait for Timer elements when created
+    defaultTimer.start().wait()
+    ,
+    // Mask, shown on screen for 500ms
+    newText("mask","+++"),
+    newTimer("maskTimer", 1000),                       
+    getText("mask").remove()
+    ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+,
+            newText("target", `<p><i>${row.Fragment}.</i></p>`)
+            .css("font-size","1.4em")
+                .center()
+                .print()
+,
+newTooltip("guide", "Remember to type a single word without punctuation.")
+        .css("font-size","1.5em")
+        .position("top center")  // Display it below the element it attaches to
+        .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
+        .print(getText("target"))   // Attach to the "target" Text element
+            ,
+            newTextInput("InputAnsw", "")
+                .log()
+                .lines(0)
+                .size(200, 100)
+                .center()
+                .print()
+    ,
+        newText("warning", "Please type your answer in the field above.")
+        .color("red")
+        .bold()
+        .remove()
+        ,
+            newText("<p>")
+                .css("font-size","1.4em")
+                .print()
+            ,
+            newButton("submit", "Submit")
+            .css("font-size","1.4em")
+                .center()
+                .print()
+                .wait(// Make sure the TextInput has been filled
+            getTextInput("InputAnsw")
+                .testNot.text("")
+                .failure( getText("warning").print() ))
+        ,
+                    getText("target").remove()          // End of trial, remove "target"
+
+))    
+    
+    
+    
+    
 Header(
     newVar("Answ").global()    
 )
@@ -353,26 +607,34 @@ Template( "Idioms.txt", row =>
                 .print()
 ,
             newText("target", `<p><i>${row.Fragment}.</i></p>`)
+            .css("font-size","1.4em")
                 .center()
                 .print()
         ,
-            newTextInput("InputAnsw", "Type your answer here..")
+            newTextInput("InputAnsw", "")
                 .log()
                 .lines(0)
                 .size(200, 100)
                 .center()
                 .print()
-,
+    ,
+        newText("warning", "Please type your answer in the field above.")
+        .color("red")
+        .bold()
+        .remove()
+        ,
             newText("<p>")
                 .css("font-size","1.4em")
                 .print()
             ,
             newButton("submit", "Submit")
+            .css("font-size","1.4em")
                 .center()
                 .print()
-                .wait()
+                .wait(// Make sure the TextInput has been filled
+            getTextInput("InputAnsw")
+                .testNot.text("")
+                .failure( getText("warning").print() ))
         ,
                     getText("target").remove()          // End of trial, remove "target"
 ))
-
-
