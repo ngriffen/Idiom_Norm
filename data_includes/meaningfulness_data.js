@@ -1,5 +1,6 @@
 PennController.ResetPrefix(null);
-var showProgressBar = false;
+var showProgressBar = true;
+
 
 Sequence("Intro",
     "Statement",
@@ -12,9 +13,9 @@ Sequence("Intro",
     "TrainE",
     "Pretest",
     "Pretest2",
-    pick(liste=randomize("ExperimentM"),39),
+    pick(liste=randomize("ExperimentM"),36),
     "break",
-    pick(liste,39),
+    pick(liste,36),
     "Outro",
     SendResults(),
     "Outro2",
@@ -110,7 +111,7 @@ newTrial( "Outro",
         .color("blue")     
         .bold()
      ,
-     newText("<p><a href='https://app.prolific.co/submissions/complete?cc=50DDF214' target=_'blank' >"+
+     newText("<p><a href='https://app.prolific.co/submissions/complete?cc=CXLJQO57' target=_'blank' >"+
           "Confirm my participation on Prolific.</a></p>")
            .center()
            .print()
@@ -169,7 +170,7 @@ newTrial("Intro",
     .css("font-size","2em")
     .print()
     ,
-    newText("Each expression that you will be shown will be four words in total.")
+    newText("Each expression that you will be shown will have four words in total.")
     .css("font-size","1.8em")
     ,
     newText("<p>")
@@ -297,11 +298,11 @@ Template( "BanalM.txt", row =>
 ,
 newTooltip("guide", "<p>Carefully read the expression and give a rating for how well you know its meaning. Use the full range of the scale to make your judgment.</p> <p><b>**After the next two expressions, the instructions will be removed so you can focus on the task.**</b></p>")
         .css("font-size","1.2em")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
-           newScale("Blank",  "1",  "2",  "3",  "4",  "5")
+           newScale("Blank",  "1",  "2",  "3",  "4",  "5")
                 .radio()
                 .labelsPosition("bottom")
                 .center()
@@ -342,13 +343,13 @@ Template( "BanalM2.txt", row =>
                 .center()
                 .print()
 ,
-newTooltip("guide", "Carefully read the expression and give a rating for how well you know its meaning.")
+newTooltip("guide", "Remember to use the full range of the scale to give your rating.")
         .css("font-size","1.5em")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
-           newScale("Blank",  "1",  "2",  "3",  "4",  "5")
+           newScale("Blank",  "1",  "2",  "3",  "4",  "5")
                 .radio()
                 .labelsPosition("bottom")
                 .center()
@@ -389,7 +390,7 @@ Template( "BanalM3.txt", row =>
                 .center()
                 .print()
             ,
-           newScale("Blank",  "1",  "2",  "3",  "4",  "5")
+           newScale("Blank",  "1",  "2",  "3",  "4",  "5")
                 .radio()
                 .labelsPosition("bottom")
                 .center()
@@ -439,7 +440,7 @@ newTrial("TrainE",
 )
 
 
- Template( "PretestR.txt", row =>
+ Template( "PretestR.txt", row =>
         newTrial("Pretest",
     defaultText.center().print("center at 50vw","middle at 50vh")
     ,
@@ -462,11 +463,11 @@ newTrial("TrainE",
 ,
 newTooltip("guide", "<p>Carefully read the expression and give a rating for how well you know its meaning. Use the full range of the scale to make your judgment.</p> <p><b>**After the next two expressions, the instructions will be removed so you can focus on the task.**</b></p>")
         .css("font-size","1.2em")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
-           newScale("Blank",  "1",  "2",  "3",  "4",  "5")
+           newScale("Blank",  "1",  "2",  "3",  "4",  "5")
                 .radio()
                 .labelsPosition("bottom")
                 .center()
@@ -507,13 +508,13 @@ Template( "PretestR2.txt", row =>
                 .center()
                 .print()
 ,
-newTooltip("guide", "Carefully read the expression and give a rating for how well you know its meaning.")
+newTooltip("guide", "Remember to use the full range of the scale to give your rating.")
         .css("font-size","1.5em")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
-           newScale("Blank",  "1",  "2",  "3",  "4",  "5")
+           newScale("Blank",  "1",  "2",  "3",  "4",  "5")
                 .radio()
                 .labelsPosition("bottom")
                 .center()
@@ -550,7 +551,7 @@ Template( "Idioms.txt", row =>
                 .center()
                 .print()
     ,
-            newScale("Blank",  "1",  "2",  "3",  "4",  "5")
+            newScale("Blank",  "1",  "2",  "3",  "4",  "5")
                 .radio()
                 .labelsPosition("bottom")
                 .center()
