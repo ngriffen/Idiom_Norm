@@ -1,5 +1,5 @@
 PennController.ResetPrefix(null);
-var showProgressBar = false;
+var showProgressBar = true;
 
 Sequence("Intro",
     "Statement",
@@ -15,9 +15,9 @@ Sequence("Intro",
     "TrainE2",
     "Pretest",
     "Pretest2",
-    pick(liste=randomize("ExperimentD"),39),
+    pick(liste=randomize("ExperimentD"),36),
     "break",
-    pick(liste,39),
+    pick(liste,36),
     "Outro",
     SendResults(),
     "Outro2",
@@ -52,27 +52,33 @@ newTrial( "break" ,
     
 newTrial( "Example1" ,
 defaultText.center().print(),
-            newText("<p><b>Example 1</b>:<i> She covered her tracks</i>.</p>")
+             newText("<p>Example 1</p>")
+                .bold()
                 .center()
                 .css("font-size","1.8em")
                 .print()
 ,
-            newText("<p>Notice that the verb <i>to cover</i> is related to the verb <i>to hide</i>.</p>")
+            newText("<p>Several participants from a related study were given the expression <i>She covered her tracks</i>.</p>")
                 .center()
                 .css("font-size","1.8em")
                 .print()
 ,
-                newText("<p>Also, the noun <i>tracks</i> is related to the <i>evidence of one's actions</i>.</p>")
+            newText("<p>Their explanation was that the verb <i>to cover</i> is related to the verb <i>to hide</i>.</p>")
                 .center()
                 .css("font-size","1.8em")
                 .print()
 ,
-            newText("<p>Both the verb and noun <b>do</b> seem to make meaningful contributions to the expression.</p>")
+                newText("<p>And, the noun <i>tracks</i> is related to the <i>evidence of one's actions</i>.</p>")
+                .center()
+                .css("font-size","1.8em")
+                .print()
+,
+            newText("<p>They found that both the verb and noun make meaningful contributions to the expression.</p>")
                 .center()
                 .css("font-size","1.8em")
                 .print()
     ,
-            newText("<p>As a result, you would select <b>Yes</b>.</p>")
+            newText("<p>As a result, they selected <b>Yes</b>.</p>")
                 .center()
                 .css("font-size","1.8em")
                 .print()
@@ -86,22 +92,33 @@ defaultText.center().print(),
     
 newTrial( "Example2" ,
 defaultText.center().print(),    
-            newText("<p><b>Example 2</b>:<i> He kicked the bucket</i>.</p>")
+            newText("<p>Example 2</p>")
+                .bold()
                 .center()
                 .css("font-size","1.8em")
                 .print()
 ,
-                newText("<p>Observe that there is no explicit relation between the verb or noun and the meaning <i>to die</i>.</p>")
+            newText("<p>In the same study, a number of other participants were given the expression <i>He kicked the bucket</i>.</p>")
                 .center()
                 .css("font-size","1.8em")
                 .print()
 ,
-            newText("<p>Both the verb and the noun <b>do not</b> seem to make meaningful contributions to the expression.</p>")
+                newText("<p>Their explanation was that there was no explicit relation to be found.</p>")
                 .center()
                 .css("font-size","1.8em")
                 .print()
 ,
-            newText("<p>As a result, you would select <b>No</b>.</p>")
+            newText("<p>Although the expressed meaning <i>to die</i> was clear, they could not find a relation.</p>")
+                .center()
+                .css("font-size","1.8em")
+                .print()
+,
+            newText("<p>They found that neither the verb nor the noun seemed to make meaningful contributions.</p>")
+                .center()
+                .css("font-size","1.8em")
+                .print()
+,
+            newText("<p>As a result, they selected <b>No</b>.</p>")
                 .center()
                 .css("font-size","1.8em")
                 .print()
@@ -178,7 +195,7 @@ newTrial( "Outro",
         .color("blue")     
         .bold()
      ,
-     newText("<p><a href='https://app.prolific.co/submissions/complete?cc=50DDF214' target=_'blank' >"+
+     newText("<p><a href='https://app.prolific.co/submissions/complete?cc=CXLJQO57' target=_'blank' >"+
           "Confirm my participation on Prolific.</a></p>")
            .center()
            .print()
@@ -237,7 +254,7 @@ newTrial("Intro",
     .css("font-size","2em")
     .print()
     ,
-    newText("Each expression that you will be shown will be four words in total.")
+    newText("Each expression that you will be shown will have four words in total.")
     .css("font-size","1.8em")
     ,
     newText("<p>")
@@ -327,12 +344,17 @@ newTrial("Intro2",
             .css("font-size","1.8em")
             .print()
 ,
-            newText("<p>Selecting <b>Yes</b> would indicate that the verb or noun <b>does</b> make a meaningful contribution.</p>")
+            newText("<p>Selecting <b>Yes</b> indicates that the verb or noun <b>does</b> make a meaningful contribution to the sentence's meaning.</p>")
             .center()
             .css("font-size","1.8em")
             .print()
 ,
-            newText("<p>Selecting <b>No</b> would indicate that the verb or noun <b>does not</b> make a meaningful contribution.</p>")
+            newText("<p>Selecting <b>No</b> indicates that <b>neither</b> the verb <b>nor</b> the noun make a meaningful contribution to the sentence's meaning.</p>")
+            .center()
+            .css("font-size","1.8em")
+            .print()
+,
+            newText("<p><b>Don't worry</b>, before you begin you will be shown several examples.</p>")
             .center()
             .css("font-size","1.8em")
             .print()
@@ -366,12 +388,12 @@ Template( "BanalD.txt", row =>
                 .print()
 ,
 newTooltip("guide", "<p>Carefully read the expression and decide if a meaningful contribution is made by the verb or noun. Select <b>Yes</b> or <b>No</b> to make your judgment.</p><p><b>**After the next two expressions, the instructions will be removed so you can focus on the task.**</p></b>")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .css("font-size","1.2em")
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
-    newScale("Blank",  "Yes",  "No")
+    newScale("Blank",  "Yes",  "No")
                 .labelsPosition("right")
                 .center()
                 .log()
@@ -416,12 +438,12 @@ Template( "BanalD2.txt", row =>
                 .print()
 ,
 newTooltip("guide", "Carefully read the expression and decide if a meaningful contribution is made by the verb or noun.")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .css("font-size","1.5em")
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
-               newScale("Blank",  "Yes",  "No")
+               newScale("Blank",  "Yes",  "No")
                 .labelsPosition("right")
                 .center()
                 .log()
@@ -466,7 +488,7 @@ Template( "BanalD3.txt", row =>
                 .center()
                 .print()
     ,
-            newScale("Blank",  "Yes",  "No")
+            newScale("Blank",  "Yes",  "No")
                 .labelsPosition("right")
                 .center()
                 .log()
@@ -494,7 +516,7 @@ newTrial("TrainE",
     .css("font-size","1.8em")
         .bold()
     ,
-        newText("<p>The typical responses that other participants gave were the following:</p>")
+        newText("<p>These are typical responses and explanations that we collected from past participants:</p>")
     .css("font-size","1.8em")
     ,
     newText("<i>She changed her mind</i>: Most participants answered <b>Yes</b>.")
@@ -504,9 +526,9 @@ newTrial("TrainE",
      newText("<p>")
      .css("font-size","0.8em")
      .print(),
-    newText("<i>She crack her whip</i>: Most participants answered <b>No</b>.")
+    newText("<i>He took the plunge</i>: Most participants answered <b>No</b>.")
     .css("font-size","1.5em"),
-        newText("<b>Explanation</b>: there is no obvious relation.")
+        newText("<b>Explanation</b>: there is no obvious relation between the verb or noun and the meaning of the expression.")
     .css("font-size","1.5em"),
          newText("<p>")
      .css("font-size","0.8em")
@@ -518,9 +540,9 @@ newTrial("TrainE",
          newText("<p>")
      .css("font-size","0.8em")
      .print(),
-    newText("<i>He threw a fit</i>: Most participants answered <b>No</b>.")
+    newText("<i>She pulled his leg</i>: Most participants answered <b>No</b>.")
     .css("font-size","1.5em"),
-    newText("<b>Explanation</b>: there is no obvious relation.")
+    newText("<b>Explanation</b>: there is no obvious relation between the verb or noun and the meaning of the expression.")
     .css("font-size","1.5em"),
     newText("<p>")
     .css("font-size","2em")
@@ -579,12 +601,12 @@ Template( "PretestR.txt", row =>
                 .print()
 ,
 newTooltip("guide", "<p>Carefully read the expression and decide if a meaningful contribution is made by the verb or noun. Select <b>Yes</b> or <b>No</b> to make your judgment.</p><p><b>**After the next two expressions, the instructions will be removed so you can focus on the task.**</p></b>")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .css("font-size","1.2em")
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
-    newScale("Blank",  "Yes",  "No")
+    newScale("Blank",  "Yes",  "No")
                 .labelsPosition("right")
                 .center()
                 .log()
@@ -629,12 +651,12 @@ Template( "PretestR3.txt", row =>
                 .print()
 ,
 newTooltip("guide", "Carefully read the expression and decide if a meaningful contribution is made by the verb or noun.")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .css("font-size","1.5em")
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
-               newScale("Blank",  "Yes",  "No")
+               newScale("Blank",  "Yes",  "No")
                 .labelsPosition("right")
                 .center()
                 .log()
@@ -677,7 +699,7 @@ Template( "Idioms.txt", row =>
                 .center()
                 .print()
     ,
-            newScale("Blank",  "Yes",  "No")
+            newScale("Blank",  "Yes",  "No")
                 .labelsPosition("right")
                 .center()
                 .log()
