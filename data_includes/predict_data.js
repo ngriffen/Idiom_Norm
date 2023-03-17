@@ -1,5 +1,7 @@
 PennController.ResetPrefix(null);
-var showProgressBar = false;
+var showProgressBar = true;
+
+
 
 Sequence("Intro",
     "Statement",
@@ -11,10 +13,10 @@ Sequence("Intro",
     "TrainE",
     "TrainE2",
     "Pretest",
-    "Pretest2",  
-    pick(liste=randomize("ExperimentP"),39),
+    "Pretest2",  
+    pick(liste=randomize("ExperimentP"),36),
     "break",
-    pick(liste,39),
+    pick(liste,36),
     "Outro",
     SendResults(),
     "Outro2",
@@ -110,7 +112,7 @@ newTrial( "Outro",
         .color("blue")     
         .bold()
      ,
-     newText("<p><a href='https://app.prolific.co/submissions/complete?cc=50DDF214' target=_'blank' >"+
+     newText("<p><a href='https://app.prolific.co/submissions/complete?cc=CXLJQO57' target=_'blank' >"+
           "Confirm my participation on Prolific.</a></p>")
            .scaling("page")
            .center()
@@ -184,7 +186,7 @@ newTrial("Intro",
     .css("font-size","2em")
     .print()
     ,
-    newText("Then you will give us your best guess on what the final word might be.")
+    newText("Then you will complete the expression with the first word that comes to mind.")
     .css("font-size","1.8em")
     ,
     newText("<p>")
@@ -327,9 +329,9 @@ Template( "BanalP.txt", row =>
                 .center()
                 .print()
     ,
-newTooltip("guide", "<p>Carefully read the expression and give us your best guess for what the final word of the expression might be.</p><p><b> **After the next two expressions, the instructions will be removed so you can focus on the task.**</b></p>")
+newTooltip("guide", "<p>Carefully read the expression and complete it with the first word that comes to mind. Make sure to type a single word without punctuation.</p><p><b> **After the next two expressions, the instructions will be removed so you can focus on the task.**</b></p>")
         .css("font-size","1.2em")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
@@ -386,7 +388,7 @@ Template( "BanalP2.txt", row =>
 ,
 newTooltip("guide", "Remember to type a single word without punctuation.")
         .css("font-size","1.5em")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
@@ -490,9 +492,9 @@ Template( "PretestP.txt", row =>
                 .center()
                 .print()
     ,
-newTooltip("guide", "<p>Carefully read the expression and give us your best guess for what the final word of the expression might be.</p><p><b> **After the next two expressions, the instructions will be removed so you can focus on the task.**</b></p>")
+newTooltip("guide", "<p>Carefully read the expression and complete it with the first word that comes to mind. Make sure to type a single word without punctuation.</p><p><b> **After the next two expressions, the instructions will be removed so you can focus on the task.**</b></p>")
         .css("font-size","1.2em")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
@@ -549,7 +551,7 @@ Template( "PretestP2.txt", row =>
 ,
 newTooltip("guide", "Remember to type a single word without punctuation.")
         .css("font-size","1.5em")
-        .position("top center")  // Display it below the element it attaches to
+        .position("top center")  // Display it below the element it attaches to
         .key("", "no click")        // Prevent from closing the tooltip (no key, no click)
         .print(getText("target"))   // Attach to the "target" Text element
             ,
