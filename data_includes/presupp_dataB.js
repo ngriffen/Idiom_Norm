@@ -1,8 +1,6 @@
 PennController.ResetPrefix(null);
 var showProgressBar = true;
 
-DebugOff()
-
 Sequence("Intro",
     "Statement",
     "Intro1",
